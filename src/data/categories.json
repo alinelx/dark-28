@@ -1,0 +1,26 @@
+[
+  {
+    "id": "death-memory",
+    "label": "Death & Memory"
+  },
+  {
+    "id": "dictatorship",
+    "label": "Dictatorship"
+  },
+  {
+    "id": "earthquake",
+    "label": "Earthquake"
+  },
+  {
+    "id": "religious-persecution",
+    "label": "Religious Persecution"
+  },
+  {
+    "id": "colonialism",
+    "label": "Colonialism"
+  },
+  {
+    "id": "crimes-urban-legends",
+    "label": "Crimes & Urban Legends"
+  }
+]
