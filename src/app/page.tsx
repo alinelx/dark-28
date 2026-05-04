@@ -37,13 +37,12 @@ export default function Home() {
           >
             Explore Route
           </Link>
-
-          <button
-            type="button"
+          <Link
+            href="/about"
             className="rounded-lg bg-(--color-burgundy) px-5 py-3 text-lg font-medium text-(--color-bg) transition hover:opacity-90"
           >
             Why Dark28?
-          </button>
+          </Link>
         </div>
       </section>
     </main>

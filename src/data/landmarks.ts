@@ -1,6 +1,7 @@
 import type { Landmark } from "@/types/landmark";
 
 export const landmarks: Landmark[] = [
+  // Cemitério dos Prazeres
   {
     id: 1,
     title: "Cemitério dos Prazeres",
@@ -14,7 +15,13 @@ export const landmarks: Landmark[] = [
     summary:
       "A historic Lisbon cemetery known for funerary heritage, aristocratic mausoleums, and urban memory.",
     historicalContext:
-      "Born from the cholera crisis of 1833, when death forced Lisbon to move its burials beyond the crowded city, Cemitério dos Prazeres became far more than a cemetery. Behind its walls lies a silent city of marble chapels, aristocratic mausoleums, and private family monuments where Portugal’s elite transformed mourning into legacy. Its most extraordinary landmark is the Palmela family mausoleum, inaugurated in 1847 and considered Europe’s largest private tomb, where nobles, servants, and trusted companions were buried side by side. Walking its avenues reveals not only the memory of epidemic tragedy, but also how monarchy, status, and remembrance shaped Lisbon’s vision of death.",
+      `Born from the cholera crisis of 1833, when death forced Lisbon to move its burials beyond the crowded city, Cemitério dos Prazeres became far more than a cemetery.
+      
+      Behind its walls lies a silent city of marble chapels, aristocratic mausoleums, and private family monuments where Portugal’s elite transformed mourning into legacy.
+      
+      Its most extraordinary landmark is the Palmela family mausoleum, inaugurated in 1847 and considered Europe’s largest private tomb, where nobles, servants, and trusted companions were buried side by side.
+      
+      Walking its avenues reveals not only the memory of epidemic tragedy, but also how monarchy, status, and remembrance shaped Lisbon’s vision of death.`,
     ethicalNote:
       "Maintain respectful behaviour: this is an active place of mourning.",
     specialTip: "Ask about the Palmela mausoleum.",
@@ -32,7 +39,8 @@ export const landmarks: Landmark[] = [
     lisboaUrl:
       "https://informacoeseservicos.lisboa.pt/contactos/diretorio-da-cidade/cemiterio-dos-prazeres-1",
   },
-    {
+  // Basílica da Estrela
+  {
     id: 2,
     title: "Basílica da Estrela",
     slug: "basilica-da-estrela",
@@ -63,7 +71,8 @@ export const landmarks: Landmark[] = [
     lisboaUrl:
       "https://informacoeseservicos.lisboa.pt/contactos/diretorio-da-cidade/basilica-da-estrela",
   },
-    {
+  // Poço dos Negros
+  {
     id: 3,
     title: "Poço dos Negros",
     slug: "poco-dos-negros",
@@ -91,7 +100,8 @@ export const landmarks: Landmark[] = [
     lisboaUrl:
       "https://lisboadeantigamente.blogspot.com/2016/03/rua-do-poco-dos-negros.html",
   },
-    {
+  // Miradouro de Santa Catarina
+  {
     id: 4,
     title: "Miradouro de Santa Catarina",
     slug: "miradouro-de-santa-catarina",
@@ -121,7 +131,8 @@ export const landmarks: Landmark[] = [
     lisboaUrl:
       "https://informacoeseservicos.lisboa.pt/contactos/diretorio-da-cidade/jardim-do-alto-de-santa-catarina",
   },
-    {
+  // Antiga sede da PIDE
+  {
     id: 5,
     title: "Antiga sede da PIDE",
     slug: "antiga-sede-da-pide",

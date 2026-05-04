@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { landmarks } from "@/data/landmarks";
 import { categories } from "@/data/categories";
 import { getRouteCOInfo, getRouteMMInfo } from "@/data/routes";
+import HistoricalContextPreview from "@/components/preview";
+import Image from "next/image";
 
 type LandmarkDetailPageProps = {
   params: Promise<{
@@ -41,7 +43,7 @@ export default async function LandmarkDetailPage({
       </header>
 
       <section className="mx-auto flex max-w-3xl flex-col gap-8 px-6 py-10">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 items-center">
           <div className="flex flex-wrap gap-2">
             {landmark.category.map((cat) => {
               const category = categories.find((item) => item.id === cat);
@@ -79,21 +81,26 @@ export default async function LandmarkDetailPage({
             </>
             )}
           </div>
-                  {landmark.imageUrl && (
-          <figure className="overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm">
-            <img
-              src={landmark.imageUrl}
-              alt={landmark.imageAlt || landmark.title}
-              className="h-auto w-full object-cover"
-            />
+        {landmark.imageUrl && (
+            <figure className="overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm">
+            <div className="relative w-full">
+                <Image
+                src={landmark.imageUrl}
+                alt={landmark.imageAlt || landmark.title}
+                width={1200}
+                height={800}
+                className="h-auto w-full object-cover"
+                />
+            </div>
+
             {landmark.imageCaption && (
-              <figcaption className="px-4 py-3 text-sm text-black/70">
+                <figcaption className="px-4 py-3 text-sm text-black/70">
                 {landmark.imageCaption}
-              </figcaption>
+                </figcaption>
             )}
-          </figure>
+            </figure>
         )}
-          <div className="flex flex-wrap gap-4 mt-2 text-sm font-medium">
+          <div className="flex flex-wrap gap-4 mt-2 text-sm font-medium items-center justify-center">
             {landmark.routeStopCO && landmark.routeStopMM && (
                 <>
                 <span className="flex flex-wrap gap-0 px-4 py-2 text-xs font-medium bg-(--color-yellow) text-black rounded-full w-max">
@@ -108,33 +115,34 @@ export default async function LandmarkDetailPage({
             )}
           </div>
         </div>
-
-
-
         <section className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
           <h2
-            className="mb-3 text-2xl font-semibold"
+            className="mb-3 text-2xl font-semibold justify-center flex"
             style={{ fontFamily: "var(--font-accent)" }}
           >
             Summary
           </h2>
-          <p className="leading-7">{landmark.summary}</p>
+          <p className="leading-7 whitespace-pre-line">{landmark.summary}</p>
         </section>
 
         <section className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
-          <h2
-            className="mb-3 text-2xl font-semibold"
-            style={{ fontFamily: "var(--font-accent)" }}
-          >
-            Historical Context
-          </h2>
-          <p className="leading-7">{landmark.historicalContext}</p>
+            <h2
+                className="mb-3 text-2xl font-semibold justify-center flex"
+                style={{ fontFamily: "var(--font-accent)" }}
+            >
+                Historical Context
+            </h2>
+
+            <HistoricalContextPreview
+                text={landmark.historicalContext}
+                previewLength={320}
+            />
         </section>
 
         {landmark.ethicalNote && (
           <section className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
             <h2
-              className="mb-3 text-2xl font-semibold"
+              className="mb-3 text-2xl font-semibold justify-center flex"
               style={{ fontFamily: "var(--font-accent)" }}
             >
               Ethical Note
@@ -146,25 +154,25 @@ export default async function LandmarkDetailPage({
         {landmark.specialTip && (
           <section className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
             <h2
-              className="mb-3 text-2xl font-semibold"
+              className="mb-3 text-2xl font-semibold justify-center flex"
               style={{ fontFamily: "var(--font-accent)" }}
             >
               Special Tip
             </h2>
-            <p className="leading-7">{landmark.specialTip}</p>
+            <p className="leading-7 text-center">{landmark.specialTip}</p>
           </section>
         )}
 
         {(landmark.visitLisboaUrl || landmark.lisboaUrl) && (
           <section className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
             <h2
-              className="mb-4 text-2xl font-semibold"
+              className="mb-4 text-2xl font-semibold justify-center flex"
               style={{ fontFamily: "var(--font-accent)" }}
             >
               Useful Links
             </h2>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 justify-center">
               {landmark.visitLisboaUrl && (
                 <a
                   href={landmark.visitLisboaUrl}
@@ -193,13 +201,13 @@ export default async function LandmarkDetailPage({
         {landmark.tags.length > 0 && (
           <section className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
             <h2
-              className="mb-4 text-2xl font-semibold"
+              className="mb-4 text-2xl font-semibold justify-center flex"
               style={{ fontFamily: "var(--font-accent)" }}
             >
               Tags
             </h2>
 
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 justify-center">
               {landmark.tags.map((tag) => (
                 <span
                   key={tag}
@@ -212,10 +220,12 @@ export default async function LandmarkDetailPage({
           </section>
         )}
 
+
+      </section>
         {nextLandmark && (
-          <section className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
+          <footer className="border border-black/10 bg-white p-6 shadow-sm">
             <h2
-              className="mb-4 text-2xl font-semibold"
+              className="mb-4 text-2xl font-semibold justify-center flex"
               style={{ fontFamily: "var(--font-accent)" }}
             >
               Next Stop
@@ -239,9 +249,8 @@ export default async function LandmarkDetailPage({
                 View
               </Link>
             </div>
-          </section>
+          </footer>
         )}
-      </section>
     </main>
   );
 }
