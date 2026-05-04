@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function Home() {
   return (
     <main className="min-h-screen bg-(--color-bg) text-(--color-text)">
@@ -34,7 +35,7 @@ export default function Home() {
             type="button"
             className="rounded-lg bg-(--color-text) px-5 py-3 text-lg font-medium text-(--color-bg) transition hover:opacity-90"
           >
-            Explore Route
+            <Link href="/route">Explore Route</Link>
           </button>
 
           <button
