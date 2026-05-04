@@ -1,5 +1,6 @@
 import { landmarks } from "@/data/landmarks";
 import { categories } from "@/data/categories";
+import Link from "next/link";
 
 export default function RoutePage() {
   return (
@@ -61,9 +62,12 @@ export default function RoutePage() {
               <p className="mt-2 text-sm">{landmark.summary}</p>
 
               <div className="mt-4 flex gap-2 justify-center">
-                <button className="text-sm px-3 py-2 bg-white border border-(--color-yellow) font-bold text-black rounded-full">
-                  Learn more
-                </button>
+                <Link
+                href={`/route/${landmark.slug}`}
+                className="text-sm px-3 py-2 bg-white border border-[var(--color-yellow)] font-bold text-black rounded-full"
+                >
+                Learn more
+                </Link>
 
                 <button className="text-sm px-3 py-2 bg-(--color-yellow) text-black rounded-full font-bold">
                   Add to plan

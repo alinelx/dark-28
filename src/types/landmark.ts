@@ -15,8 +15,8 @@ export interface Landmark {
   title: string;
   slug: string;
   category: string[];
-  routeStopCO?: number;
-  routeStopMM?: number;
+  routeStopCO: number;
+  routeStopMM: number;
   locationName: string;
   type: string;
   price?: string;
