@@ -1,8 +1,38 @@
+"use client";
 import { landmarks } from "@/data/landmarks";
 import { categories } from "@/data/categories";
 import Link from "next/link";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useMemo } from "react";
 
 export default function RoutePage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const categoryFromUrl = searchParams.get("category");
+  const activeCategory =
+    categoryFromUrl && categories.some((cat) => cat.id === categoryFromUrl)
+      ? categoryFromUrl
+      : "all";
+
+  const filteredLandmarks = useMemo(() => {
+    if (activeCategory === "all") {
+      return landmarks;
+    }
+
+    return landmarks.filter((landmark) =>
+      landmark.category.includes(activeCategory)
+    );
+  }, [activeCategory]);
+  
+  function handleCategoryChange(categoryId: string) {
+    if (categoryId === "all") {
+      router.push("/route");
+      return;
+    }
+
+    router.push(`/route?category=${categoryId}`);
+  }
+
   return (
     <main className="min-h-screen bg-(--color-bg) text-(--color-text) px-6 py-8">
       <div className="max-w-xl mx-auto flex flex-col items-center justify-center">
@@ -19,9 +49,40 @@ export default function RoutePage() {
         >
           Discover the overlooked histories hidden across Lisbon.
         </h2>
+        <div className="mb-8 flex flex-wrap justify-center gap-2">
+          <button
+            type="button"
+            onClick={() => handleCategoryChange("all")}
+            className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+              activeCategory === "all"
+                ? "bg-(--color-text) text-(--color-bg)"
+                : "bg-white text-black border border-black/10"
+            }`}
+          >
+            All
+          </button>
 
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              type="button"
+              onClick={() => handleCategoryChange(category.id)}
+              className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+                activeCategory === category.id
+                  ? "bg-(--color-burgundy) text-white"
+                  : "bg-white text-black border border-black/10"
+              }`}
+            >
+              {category.label}
+            </button>
+          ))}
+        </div>
+        <p className="mb-6 text-sm text-black/60">
+          Showing {filteredLandmarks.length} landmark
+          {filteredLandmarks.length === 1 ? "" : "s"}
+        </p>
         <div className="flex flex-col gap-4">
-          {landmarks.map((landmark) => (
+          {filteredLandmarks.map((landmark) => (
             <div
               key={landmark.id}
               className="rounded-lg border border-black/10 bg-white p-4 shadow-sm"

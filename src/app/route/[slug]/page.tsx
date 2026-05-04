@@ -46,15 +46,17 @@ export default async function LandmarkDetailPage({
         <div className="flex flex-col gap-4 items-center">
           <div className="flex flex-wrap gap-2">
             {landmark.category.map((cat) => {
-              const category = categories.find((item) => item.id === cat);
-              return (
-                <span
-                  key={cat}
-                  className="rounded-full bg-(--color-burgundy) px-4 py-1 text-xs font-semibold text-white"
+            const category = categories.find((item) => item.id === cat);
+
+            return (
+                <Link
+                key={cat}
+                href={`/route?category=${cat}`}
+                className="rounded-full bg-(--color-burgundy) px-4 py-1 text-xs font-semibold text-white transition hover:opacity-90"
                 >
-                  {category?.label || cat}
-                </span>
-              );
+                {category?.label || cat}
+                </Link>
+            );
             })}
           </div>
 
@@ -72,7 +74,7 @@ export default async function LandmarkDetailPage({
             {landmark.locationName} • {landmark.type}
           </div>
 
-          <div className="flex flex-wrap gap-4 px-4 py-2 text-xs font-medium bg-black text-white rounded-full w-max">
+          <div className="flex flex-wrap gap-4 px-4 py-2 text-xs uppercase font-medium bg-(--color-burgundy) text-white rounded-full w-max">
             {landmark.price && <span>{landmark.price}</span>}
             {landmark.estimatedVisitTime && (
             <>
