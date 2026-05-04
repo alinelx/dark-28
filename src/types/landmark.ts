@@ -1,30 +1,37 @@
-export interface LandmarkCategory {
-  id: string;
-  label: string;
-}
-
-export interface LandmarkCoordinates {
+export interface Coordinates {
+  land_id: number;
   lat: number;
   lng: number;
 }
 
-export interface Landmark {
+export interface LandmarkCategory {
   id: string;
+  label: string;
+  description: string;
+}
+
+export interface Landmark {
+  id: number;
   title: string;
   slug: string;
   category: string[];
-  routeStop: number;
-  tramStop: string;
+  routeStopCO?: number;
+  routeStopMM?: number;
   locationName: string;
   type: string;
-  district?: string;
   price?: string;
   summary: string;
   historicalContext: string;
   ethicalNote?: string;
+  specialTip?: string;
+  tags: string[];
   estimatedVisitTime?: string;
   publishedDate?: string;
-  nextStopId?: string;
+  nextLandId?: number;
   imageUrl?: string;
-  coordinates?: LandmarkCoordinates;
+  imageCaption?: string;
+  imageAlt?: string;
+  visitLisboaUrl?: string;
+  lisboaUrl?: string;
+  coordinates?: Coordinates;
 }
