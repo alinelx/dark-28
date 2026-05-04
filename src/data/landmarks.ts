@@ -14,7 +14,7 @@ export const landmarks: Landmark[] = [
     summary:
       "A historic Lisbon cemetery known for funerary heritage, aristocratic mausoleums, and urban memory.",
     historicalContext:
-      "Born from the cholera crisis of 1833, when death forced Lisbon to move its burials beyond the crowded city, Cemitério dos Prazeres became far more than a cemetery...",
+      "Born from the cholera crisis of 1833, when death forced Lisbon to move its burials beyond the crowded city, Cemitério dos Prazeres became far more than a cemetery. Behind its walls lies a silent city of marble chapels, aristocratic mausoleums, and private family monuments where Portugal’s elite transformed mourning into legacy. Its most extraordinary landmark is the Palmela family mausoleum, inaugurated in 1847 and considered Europe’s largest private tomb, where nobles, servants, and trusted companions were buried side by side. Walking its avenues reveals not only the memory of epidemic tragedy, but also how monarchy, status, and remembrance shaped Lisbon’s vision of death.",
     ethicalNote:
       "Maintain respectful behaviour: this is an active place of mourning.",
     specialTip: "Ask about the Palmela mausoleum.",
