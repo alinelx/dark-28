@@ -14,7 +14,7 @@ export default function Home() {
         </button>
       </header>
 
-      <section className="mx-auto flex min-h-[calc(100vh-104px) max-w-xl flex-col items-center justify-center px-8 py-12 text-center">
+      <section className="mx-auto flex min-h-[calc(100vh-104px)] max-w-xl flex-col items-center justify-center px-8 py-12 text-center">
         <h1
           className="max-w-md text-5xl font-semibold leading-none tracking-tight md:text-6xl"
           style={{ fontFamily: "var(--font-headline)" }}
@@ -31,12 +31,12 @@ export default function Home() {
         </p>
 
         <div className="mt-10 flex w-full max-w-sm flex-col gap-3">
-          <button
-            type="button"
+          <Link
+            href="/route"
             className="rounded-lg bg-(--color-text) px-5 py-3 text-lg font-medium text-(--color-bg) transition hover:opacity-90"
           >
-            <Link href="/route">Explore Route</Link>
-          </button>
+            Explore Route
+          </Link>
 
           <button
             type="button"
