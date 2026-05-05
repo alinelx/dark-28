@@ -4,6 +4,7 @@ import { categories } from "@/data/categories";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useMemo } from "react";
+import CategoryBadge from "@/components/CategoryBadge";
 
 export default function RoutePage() {
   const router = useRouter();
@@ -94,7 +95,7 @@ export default function RoutePage() {
                 <div className="flex-1 pl-2 items-right">
                 <h2
                     className="text-2xl font-black"
-                    style={{ fontFamily: "(--font-headline)" }}
+                    style={{ fontFamily: "var(--font-headline)" }}
                 >
                     {landmark.title}
                 </h2>
@@ -102,12 +103,11 @@ export default function RoutePage() {
                 {landmark.category.map((cat) => {
                   const category = categories.find((c) => c.id === cat);
                   return (
-                    <span
+                    <CategoryBadge
                       key={cat}
-                      className="text-xs px-4 py-1 rounded-full bg-(--color-burgundy) text-white"
-                    >
-                      {category?.label || cat}
-                    </span>
+                      label={category?.label || cat}
+                      href={`/route?category=${cat}`}
+                    />
                   );
                 })}
                 </div>
@@ -125,7 +125,7 @@ export default function RoutePage() {
               <div className="mt-4 flex gap-2 justify-center">
                 <Link
                 href={`/route/${landmark.slug}`}
-                className="text-sm px-3 py-2 bg-white border border-(--color-yellow)] font-bold text-black rounded-full"
+                className="text-sm px-3 py-2 bg-white border border-(--color-yellow) font-bold text-black rounded-full"
                 >
                 Learn more
                 </Link>
