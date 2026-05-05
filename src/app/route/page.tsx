@@ -1,7 +1,6 @@
 "use client";
 import { landmarks } from "@/data/landmarks";
 import { categories } from "@/data/categories";
-import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useMemo } from "react";
 import CategoryBadge from "@/components/CategoryBadge";

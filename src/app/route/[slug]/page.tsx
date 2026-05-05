@@ -8,6 +8,7 @@ import PageHeader from "@/components/PageHeader";
 import SectionCard from "@/components/SectionCard";
 import CategoryBadge from "@/components/CategoryBadge";
 import HistoricalContextPreview from "@/components/Preview";
+import PlanButton from "@/components/PlanButton";
 
 type LandmarkDetailPageProps = {
   params: Promise<{
@@ -79,6 +80,9 @@ export default async function LandmarkDetailPage({
                         <span>{landmark.estimatedVisitTime}</span>
                         </>
                         )}</span>
+                    </div>
+                    <div className="flex justify-center pt-2">
+                        <PlanButton landmarkId={landmark.id} />
                     </div>
                 </div>
             </SectionCard>

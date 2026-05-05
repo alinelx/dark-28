@@ -2,6 +2,7 @@ import Link from "next/link";
 import { categories } from "@/data/categories";
 import type { Landmark } from "@/types/landmark";
 import CategoryBadge from "@/components/CategoryBadge";
+import PlanButton from "@/components/PlanButton";
 
 type LandmarkCardProps = {
   landmark: Landmark;
@@ -60,9 +61,7 @@ export default function LandmarkCard({ landmark }: LandmarkCardProps) {
           Learn more
         </Link>
 
-        <button className="rounded-full bg-(--color-yellow) px-3 py-2 text-sm font-bold text-black">
-          Add to plan
-        </button>
+        <PlanButton landmarkId={landmark.id} />
       </div>
     </div>
   );
