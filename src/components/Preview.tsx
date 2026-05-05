@@ -31,7 +31,7 @@ export default function HistoricalContextPreview({
       </div>
 
       {!isExpanded && shouldTruncate && (
-        <div className="absolute z-10 top-2 left-1/2 transform -translate-x-1/2 flex justify-center">
+        <div className="absolute z-10 top-20 left-1/2 transform -translate-x-1/2 flex justify-center">
           <button
             type="button"
             onClick={() => setIsExpanded(true)}

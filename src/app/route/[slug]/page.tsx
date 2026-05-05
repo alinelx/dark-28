@@ -34,60 +34,68 @@ export default async function LandmarkDetailPage({
         <main className="min-h-screen bg-(--color-bg) text-(--color-text)">
             <PageHeader backHref="/route" backLabel="Back to Route" />
             <SectionCard title={landmark.title}>
-                <div className="flex flex-col gap-4 items-center">
-                    {landmark.category.map((cat) => {
-                    const category = categories.find((item) => item.id === cat);
+                <div className="flex flex-col gap-auto items-center m-3">
+                    <div className="flex flex-row gap-4 pb-4 items-center">
+                        {landmark.category.map((cat) => {
+                        const category = categories.find((item) => item.id === cat);
 
-                    return (
-                        <CategoryBadge
-                        key={cat}
-                        label={category?.label || cat}
-                        href={`/route?category=${cat}`}
-                        />
-                    );
-                    })}
-                </div>
-                {landmark.title}
-                {landmark.locationName} • {landmark.type}
-                {landmark.price && <span>{landmark.price}</span>}
-                {landmark.estimatedVisitTime && (
-                <>
-                <span>|</span>
-                <span>{landmark.estimatedVisitTime}</span>
-                </>
-                )}
-                {landmark.imageUrl && (
-                <figure className="overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm">
-                    <div className="relative w-full">
-                        <Image
-                        src={landmark.imageUrl}
-                        alt={landmark.imageAlt || landmark.title}
-                        width={1200}
-                        height={800}
-                        className="h-auto w-full object-cover"
-                        />
+                        return (
+                            <CategoryBadge
+                                key={cat}
+                                label={category?.label || cat}
+                                href={`/route?category=${cat}`}
+                            />
+                        );
+                        })}
                     </div>
+                    {landmark.imageUrl && (
+                    <figure className="overflow-hidden p-4 rounded-2xl border border-black/10 bg-white shadow-sm">
+                        <div className="relative w-full">
+                            <Image
+                            src={landmark.imageUrl}
+                            alt={landmark.imageAlt || landmark.title}
+                            width={1200}
+                            height={800}
+                            className="h-auto w-full object-cover"
+                            />
+                        </div>
 
-                    {landmark.imageCaption && (
-                        <figcaption className="px-4 py-3 text-sm text-black/70">
-                        {landmark.imageCaption}
-                        </figcaption>
+                        {landmark.imageCaption && (
+                            <figcaption className="px-4 py-3 text-sm text-black/70">
+                            {landmark.imageCaption}
+                            </figcaption>
+                        )}
+                        </figure>
                     )}
-                    </figure>
-                )}
-                {landmark.routeStopCO && landmark.routeStopMM && (
-                    <>
-                    <span className="flex flex-wrap gap-0 px-4 py-2 text-xs font-medium bg-(--color-yellow) text-black rounded-full w-max">
-                    <b>{getRouteCOInfo(landmark.routeStopCO)?.routeLabel}</b>
-                    {landmark.routeStopCO} - {getRouteCOInfo(landmark.routeStopCO)?.stopDetails.stop_name}
-                    </span>
-                    <span className="flex flex-wrap gap-0 px-4 py-2 text-xs font-medium bg-(--color-yellow) text-black rounded-full w-max">
-                    <b>{getRouteMMInfo(landmark.routeStopMM)?.routeLabel}</b>
-                    {landmark.routeStopMM} - {getRouteMMInfo(landmark.routeStopMM)?.stopDetails.stop_name}
-                    </span>
-                    </>
-                )}
+                    <div className="flex flex-row gap-2 p-4 items-center justify-center">
+                        <span className="text-sm rounded-full px-3 font-bold text-black bg-(--color-gold) p-2 items-center justify-center flex">
+                        {landmark.locationName} • {landmark.type}
+                        </span>
+                        <span className="text-sm font-bold text-black pt-0 p-2 items-center justify-center flex">
+                        {landmark.price && <span>{landmark.price}</span>}
+                        {landmark.estimatedVisitTime && (
+                        <>
+                        <span>|</span>
+                        <span>{landmark.estimatedVisitTime}</span>
+                        </>
+                        )}</span>
+                    </div>
+                </div>
             </SectionCard>
+            {landmark.routeStopCO && landmark.routeStopMM && (
+                <SectionCard title="Tram 28 - Nearby Stops">
+                    <div className="flex flex-col gap-4 p-4 items-center justify-center">
+                        <span className="wrap-auto text-center gap-0 px-4 py-2 text-xs font-medium bg-(--color-yellow) text-black rounded-full w-auto">
+                        <b>{getRouteCOInfo(landmark.routeStopCO)?.routeLabel}</b><br />
+                        {landmark.routeStopCO} - {getRouteCOInfo(landmark.routeStopCO)?.stopDetails.stop_name}
+                        </span>
+                        <span className="wrap-auto text-center gap-0 px-4 py-2 text-xs font-medium bg-(--color-yellow) text-black rounded-full w-max">
+                        <b>{getRouteMMInfo(landmark.routeStopMM)?.routeLabel}</b><br />
+                        {landmark.routeStopMM} - {getRouteMMInfo(landmark.routeStopMM)?.stopDetails.stop_name}
+                        </span>
+                    </div>
+                </SectionCard>
+            )}
             <SectionCard title="Summary">
                 <p>{landmark.summary}</p>
             </SectionCard>

@@ -1,19 +1,9 @@
+import PageHeader from "@/components/PageHeader";
 import Link from "next/link";
 export default function Home() {
   return (
     <main className="min-h-screen bg-(--color-bg) text-(--color-text)">
-      <header className="flex items-center justify-between bg-(--color-yellow) px-6 pb-6 pt-10">
-        <div className="text-lg font-semibold tracking-wide">Dark28</div>
-
-        <button
-          type="button"
-          aria-label="Open menu"
-          className="rounded-full bg-(--color-text) px-4 py-2 text-sm text-(--color-bg)"
-        >
-          Menu
-        </button>
-      </header>
-
+      <PageHeader backHref="/menu" backLabel="Menu" />
       <section className="mx-auto flex min-h-[calc(100vh-104px)] max-w-xl flex-col items-center justify-center px-8 py-12 text-center">
         <h1
           className="max-w-md text-5xl font-semibold leading-none tracking-tight md:text-6xl"
