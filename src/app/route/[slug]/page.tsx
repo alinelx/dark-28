@@ -9,6 +9,7 @@ import SectionCard from "@/components/SectionCard";
 import CategoryBadge from "@/components/CategoryBadge";
 import HistoricalContextPreview from "@/components/Preview";
 import PlanButton from "@/components/PlanButton";
+import VisitedButton from "@/components/VisitedButton";
 
 type LandmarkDetailPageProps = {
   params: Promise<{
@@ -90,8 +91,9 @@ export default async function LandmarkDetailPage({
                         </>
                         )}</span>
                     </div>
-                    <div className="flex justify-center pt-2">
-                        <PlanButton landmarkId={landmark.id} />
+                    <div className="flex justify-center gap-3 pt-2">
+                    <PlanButton landmarkId={landmark.id} />
+                    <VisitedButton landmarkId={landmark.id} />
                     </div>
                 </div>
             </SectionCard>

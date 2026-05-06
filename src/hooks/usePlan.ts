@@ -9,17 +9,23 @@ const PLAN_EVENT = "dark28-plan-updated";
 const EMPTY_PLAN: number[] = [];
 const DEFAULT_DIRECTION = "co-to-mm";
 
+const VISITED_KEY = "dark28-visited";
+const EMPTY_VISITED: number[] = [];
+
 type PlanStoreSnapshot = {
   plannedIds: number[];
+  visitedIds: number[];
   direction: string;
 };
 
 const EMPTY_SNAPSHOT: PlanStoreSnapshot = {
   plannedIds: EMPTY_PLAN,
+  visitedIds: EMPTY_VISITED,
   direction: DEFAULT_DIRECTION,
 };
 
 let cachedPlanRaw = "";
+let cachedVisitedRaw = "";
 let cachedDirectionRaw = "";
 let cachedSnapshot: PlanStoreSnapshot = EMPTY_SNAPSHOT;
 
@@ -35,6 +41,21 @@ function parsePlan(raw: string | null): number[] {
   } catch (error) {
     console.error("Failed to parse plan from localStorage:", error);
     return EMPTY_PLAN;
+  }
+}
+
+function parseVisited(raw: string | null): number[] {
+  if (!raw) return EMPTY_VISITED;
+
+  try {
+    const parsed = JSON.parse(raw);
+
+    if (!Array.isArray(parsed)) return EMPTY_VISITED;
+
+    return parsed.filter((item): item is number => typeof item === "number");
+  } catch (error) {
+    console.error("Failed to parse visited from localStorage:", error);
+    return EMPTY_VISITED;
   }
 }
 
@@ -57,6 +78,17 @@ function getCurrentPlanRaw(): string {
   }
 }
 
+function getCurrentVisitedRaw(): string {
+  if (typeof window === "undefined") return "";
+
+  try {
+    return window.localStorage.getItem(VISITED_KEY) ?? "";
+  } catch (error) {
+    console.error("Failed to read visited from localStorage:", error);
+    return "";
+  }
+}
+
 function getCurrentDirectionRaw(): string {
   if (typeof window === "undefined") return DEFAULT_DIRECTION;
 
@@ -70,17 +102,24 @@ function getCurrentDirectionRaw(): string {
 
 function getSnapshot(): PlanStoreSnapshot {
   const planRaw = getCurrentPlanRaw();
+  const visitedRaw = getCurrentVisitedRaw();
   const directionRaw = getCurrentDirectionRaw();
 
-  if (planRaw === cachedPlanRaw && directionRaw === cachedDirectionRaw) {
+  if (
+    planRaw === cachedPlanRaw &&
+    visitedRaw === cachedVisitedRaw &&
+    directionRaw === cachedDirectionRaw
+  ) {
     return cachedSnapshot;
   }
 
   cachedPlanRaw = planRaw;
+  cachedVisitedRaw = visitedRaw;
   cachedDirectionRaw = directionRaw;
 
   cachedSnapshot = {
     plannedIds: parsePlan(planRaw),
+    visitedIds: parseVisited(visitedRaw),
     direction: parseDirection(directionRaw),
   };
 
@@ -123,6 +162,20 @@ function writePlan(nextIds: number[]) {
   }
 }
 
+function writeVisited(nextIds: number[]) {
+  if (typeof window === "undefined") return;
+
+  const uniqueIds = Array.from(new Set(nextIds));
+  const nextRaw = JSON.stringify(uniqueIds);
+
+  try {
+    window.localStorage.setItem(VISITED_KEY, nextRaw);
+    window.dispatchEvent(new Event(PLAN_EVENT));
+  } catch (error) {
+    console.error("Failed to save visited to localStorage:", error);
+  }
+}
+
 function writeDirection(nextDirection: string) {
   if (typeof window === "undefined") return;
 
@@ -141,7 +194,7 @@ export function usePlan() {
     getServerSnapshot
   );
 
-  const { plannedIds, direction } = snapshot;
+  const { plannedIds, visitedIds, direction } = snapshot;
 
   function addToPlan(id: number) {
     if (plannedIds.includes(id)) return;
@@ -165,6 +218,32 @@ export function usePlan() {
     return plannedIds.includes(id);
   }
 
+  function addVisited(id: number) {
+    if (visitedIds.includes(id)) return;
+    writeVisited([...visitedIds, id]);
+  }
+
+  function removeVisited(id: number) {
+    writeVisited(visitedIds.filter((item) => item !== id));
+  }
+
+  function toggleVisited(id: number) {
+    if (visitedIds.includes(id)) {
+      writeVisited(visitedIds.filter((item) => item !== id));
+      return;
+    }
+
+    writeVisited([...visitedIds, id]);
+  }
+
+  function isVisited(id: number) {
+    return visitedIds.includes(id);
+  }
+
+  function clearVisited() {
+    writeVisited([]);
+  }
+
   function setDirection(nextDirection: string) {
     if (nextDirection !== "co-to-mm" && nextDirection !== "mm-to-co") {
       return;
@@ -179,6 +258,7 @@ export function usePlan() {
 
   return {
     plannedIds,
+    visitedIds,
     direction,
     addToPlan,
     removeFromPlan,
@@ -186,5 +266,10 @@ export function usePlan() {
     isPlanned,
     setDirection,
     clearPlan,
+    addVisited,
+    removeVisited,
+    toggleVisited,
+    isVisited,
+    clearVisited,
   };
 }

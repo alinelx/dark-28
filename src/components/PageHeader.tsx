@@ -124,9 +124,16 @@ export default function PageHeader({
               <Link
                 href="/plan"
                 onClick={closeMenu}
-                className="rounded-full border border-(--color-yellow) px-4 py-3 text-sm font-bold text-black"
+                className="rounded-full  p-2 text-sm font-bold text-black"
               >
                 My Plan
+              </Link>
+              <Link
+                href="/profile"
+                onClick={closeMenu}
+                className="rounded-full p-2 pt-1 text-sm font-bold text-black"
+              >
+                Profile
               </Link>
             </nav>
           </aside>

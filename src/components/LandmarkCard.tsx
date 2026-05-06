@@ -1,8 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import { categories } from "@/data/categories";
 import type { Landmark } from "@/types/landmark";
 import CategoryBadge from "@/components/CategoryBadge";
 import PlanButton from "@/components/PlanButton";
+import { usePlan } from "@/hooks/usePlan";
+import VisitedButton from "@/components/VisitedButton";
 
 type LandmarkCardProps = {
   landmark: Landmark;
@@ -10,6 +14,8 @@ type LandmarkCardProps = {
 };
 
 export default function LandmarkCard({ landmark, activeCategory }: LandmarkCardProps) {
+  const { isVisited } = usePlan();
+  const visited = isVisited(landmark.id);
   return (
     <div className="rounded-lg border border-black/10 bg-white p-4 shadow-sm">
       <div className="flex items-center content-center gap-2">
@@ -24,7 +30,17 @@ export default function LandmarkCard({ landmark, activeCategory }: LandmarkCardP
           >
             {landmark.title}
           </h2>
-
+          <div className="mt-2 flex flex-wrap gap-2">
+            {visited ? (
+              <span className="rounded-full bg-(--color-burgundy) px-3 py-1 text-xs font-bold text-(--color-bg)">
+                Visited
+              </span>
+            ) : (
+              <span className="rounded-full bg-black/5 px-3 py-1 text-xs font-bold text-black">
+                Pending
+              </span>
+            )}
+          </div>
           <div className="mt-1 flex flex-wrap gap-2">
             {landmark.category.map((cat) => {
               const category = categories.find((c) => c.id === cat);
@@ -67,6 +83,7 @@ export default function LandmarkCard({ landmark, activeCategory }: LandmarkCardP
         </Link>
 
         <PlanButton landmarkId={landmark.id} />
+        <VisitedButton landmarkId={landmark.id} />
       </div>
     </div>
   );
