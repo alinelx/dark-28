@@ -73,10 +73,10 @@ export default function RoutePage() {
                 className={`rounded-full px-4 py-2 text-sm font-bold transition ${
                   activeCategory === category.id
                     ? "bg-(--color-text) text-(--color-bg)"
-                    : "bg-(--color-burgundy) text-black border border-black/10 text-sm"
+                    : "bg-(--color-burgundy) text-white border border-black/10 text-sm"
                 }`}
               >
-                <CategoryBadge label={category.label} />
+                {category.label}
               </button>
           ))}
         </div>

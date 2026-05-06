@@ -2,17 +2,25 @@
 
 import Link from "next/link";
 import { landmarks } from "@/data/landmarks";
+import { categories } from "@/data/categories";
 import { usePlan } from "@/hooks/usePlan";
 import PageHeader from "@/components/PageHeader";
 import PlanButton from "@/components/PlanButton";
 import SectionCard from "@/components/SectionCard";
+import CategoryBadge from "@/components/CategoryBadge";
 
 export default function PlanPage() {
-  const { plannedIds } = usePlan();
+  const { plannedIds, direction, setDirection, clearPlan } = usePlan();
 
-  const plannedLandmarks = landmarks.filter((landmark) =>
-    plannedIds.includes(landmark.id)
-  );
+  const plannedLandmarks = landmarks
+    .filter((landmark) => plannedIds.includes(landmark.id))
+    .sort((a, b) => {
+      if (direction === "mm-to-co") {
+        return b.id - a.id;
+      }
+
+      return a.id - b.id;
+    });
 
   return (
     <main className="min-h-screen bg-(--color-bg) text-(--color-text)">
@@ -32,6 +40,48 @@ export default function PlanPage() {
         >
           Build your own Dark28 route through Lisbon.
         </p>
+
+        <div className="flex flex-col gap-3">
+          <p className="text-sm font-semibold text-black/70">Tram 28 direction</p>
+
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => setDirection("co-to-mm")}
+              className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+                direction === "co-to-mm"
+                  ? "bg-(--color-text) text-(--color-bg)"
+                  : "bg-white text-black border border-black/10"
+              }`}
+            >
+              Campo Ourique → Martim Moniz
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setDirection("mm-to-co")}
+              className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+                direction === "mm-to-co"
+                  ? "bg-(--color-text) text-(--color-bg)"
+                  : "bg-white text-black border border-black/10"
+              }`}
+            >
+              Martim Moniz → Campo Ourique
+            </button>
+          </div>
+        </div>
+
+        {plannedLandmarks.length > 0 && (
+          <div className="flex justify-end">
+            <button
+              type="button"
+              onClick={clearPlan}
+              className="rounded-full bg-(--color-text) px-4 py-2 text-sm font-bold text-(--color-bg)"
+            >
+              Clear plan
+            </button>
+          </div>
+        )}
 
         {plannedLandmarks.length === 0 ? (
           <SectionCard title="No saved landmarks yet">
@@ -59,10 +109,28 @@ export default function PlanPage() {
                 >
                   {plannedLandmark.title}
                 </h2>
+                <div className="flex flex-wrap gap-2">
+                  {plannedLandmark.category.map((cat) => {
+                    const category = categories.find((c) => c.id === cat);
 
+                    return (
+                      <CategoryBadge
+                        key={cat}
+                        label={category?.label || cat}
+                        href={`/route?category=${cat}`}
+                      />
+                    );
+                  })}
+                </div>
                 <p className="text-sm font-bold text-(--color-gold)">
                   {plannedLandmark.locationName} • {plannedLandmark.type}
                 </p>
+                
+                {plannedLandmark.estimatedVisitTime && (
+                  <p className="text-sm font-semibold">
+                    Estimated visit time: {plannedLandmark.estimatedVisitTime}
+                  </p>
+                )}
 
                 <p>{plannedLandmark.summary}</p>
 
