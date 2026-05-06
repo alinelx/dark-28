@@ -42,7 +42,7 @@ export default async function LandmarkDetailPage({
 
     return (
         <main className="min-h-screen bg-(--color-bg) text-(--color-text)">
-            <PageHeader backHref={backHref} backLabel="Back to Route" />
+            <PageHeader backHref={backHref} />
             <SectionCard title={landmark.title}>
                 <div className="flex flex-col gap-auto items-center m-3">
                     <div className="flex flex-row gap-4 pb-4 items-center">

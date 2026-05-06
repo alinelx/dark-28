@@ -21,9 +21,12 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Dark28",
+  title: "Dark28.pt",
   description:
     "A dark cultural heritage guide exploring overlooked histories along Lisbon's iconic Tram 28.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

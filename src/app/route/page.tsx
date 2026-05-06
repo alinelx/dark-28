@@ -37,7 +37,7 @@ export default function RoutePage() {
 
   return (
     <main className="min-h-screen bg-(--color-bg) text-(--color-text)">
-      <PageHeader backHref="/" backLabel="Back to Home" />
+      <PageHeader backHref="/" />
       <div className="max-w-xl mx-auto flex flex-col items-center justify-center p-10">
         <h1
           className="text-4xl font-black mb-6"

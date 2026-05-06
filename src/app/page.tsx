@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="min-h-screen bg-(--color-bg) text-(--color-text)">
-      <PageHeader backHref="/menu" backLabel="Menu" />
+      <PageHeader backHref="" />
       <section className="mx-auto flex min-h-[calc(100vh-104px)] max-w-xl flex-col items-center justify-center px-8 py-12 text-center">
         <h1
           className="max-w-md text-5xl font-semibold leading-none tracking-tight md:text-6xl"

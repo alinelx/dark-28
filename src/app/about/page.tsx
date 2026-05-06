@@ -5,7 +5,7 @@ import SectionCard from "@/components/SectionCard";
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-(--color-bg) text-(--color-text)">
-      <PageHeader backHref="/" backLabel="Back Home" />
+      <PageHeader backHref="/" />
       <SectionCard title="What is Dark28?">
         <p>
           Dark28 is a digital cultural heritage project that reimagines Lisbon’s
