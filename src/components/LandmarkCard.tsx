@@ -6,9 +6,10 @@ import PlanButton from "@/components/PlanButton";
 
 type LandmarkCardProps = {
   landmark: Landmark;
+  activeCategory?: string;
 };
 
-export default function LandmarkCard({ landmark }: LandmarkCardProps) {
+export default function LandmarkCard({ landmark, activeCategory }: LandmarkCardProps) {
   return (
     <div className="rounded-lg border border-black/10 bg-white p-4 shadow-sm">
       <div className="flex items-center content-center gap-2">
@@ -55,7 +56,11 @@ export default function LandmarkCard({ landmark }: LandmarkCardProps) {
 
       <div className="mt-4 flex justify-center gap-2">
         <Link
-          href={`/route/${landmark.slug}`}
+          href={
+            activeCategory && activeCategory !== "all"
+              ? `/route/${landmark.slug}?category=${activeCategory}`
+              : `/route/${landmark.slug}`
+          }
           className="rounded-full border border-(--color-yellow) bg-white px-3 py-2 text-sm font-bold text-black"
         >
           Learn more

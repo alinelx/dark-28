@@ -11,8 +11,10 @@ export function Logo(){
   return (
     <Image
         src="https://i.imgur.com/NgOQvTi.png"
-        width={70}
-        height={70}
+        width= "0"
+        height="0"
+        sizes="20vw"
+        className="w-full h-auto"
         alt="Dark28 Logo"
     />
   )
@@ -37,7 +39,7 @@ export default function PageHeader({
           <div />
         )}
 
-        <div className="text-lg w-auto font-semibold tracking-wide">{brand()}</div>
+        <div className="text-lg w-auto aspect-ratio-1 font-semibold tracking-wide">{brand()}</div>
       </div>
     </header>
   );

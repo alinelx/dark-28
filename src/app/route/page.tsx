@@ -86,7 +86,11 @@ export default function RoutePage() {
         </p>
         <div className="flex flex-col gap-4">
           {filteredLandmarks.map((landmark) => (
-            <LandmarkCard key={landmark.id} landmark={landmark} />
+            <LandmarkCard
+              key={landmark.id}
+              landmark={landmark}
+              activeCategory={activeCategory}
+            />
           ))}
         </div>
       </div>

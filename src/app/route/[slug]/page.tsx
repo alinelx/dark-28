@@ -14,12 +14,21 @@ type LandmarkDetailPageProps = {
   params: Promise<{
     slug: string;
   }>;
+  searchParams: Promise<{
+    category?: string;
+  }>;
 };
 
 export default async function LandmarkDetailPage({
     params,
+    searchParams,
 }: LandmarkDetailPageProps) {
     const { slug } = await params;
+    const { category } = await searchParams;
+    const backHref =
+    category && categories.some((cat) => cat.id === category)
+        ? `/route?category=${category}`
+        : "/route";
 
     const landmark = landmarks.find((item) => item.slug === slug);
 
@@ -33,7 +42,7 @@ export default async function LandmarkDetailPage({
 
     return (
         <main className="min-h-screen bg-(--color-bg) text-(--color-text)">
-            <PageHeader backHref="/route" backLabel="Back to Route" />
+            <PageHeader backHref={backHref} backLabel="Back to Route" />
             <SectionCard title={landmark.title}>
                 <div className="flex flex-col gap-auto items-center m-3">
                     <div className="flex flex-row gap-4 pb-4 items-center">
