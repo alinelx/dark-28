@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -11,12 +11,12 @@ type PageHeaderProps = {
 
 function Logo() {
   return (
-    <Link href="/" aria-label="Go to homepage" className="block w-16">
+    <Link href="/" aria-label="Go to homepage" className="block w-20">
       <Image
         src="/logo.png"
         width={160}
         height={160}
-        className="h-auto w-full"
+        className="h-auto w-full hover:scale-130 transition-transform duration-200 ease-in-out"
         alt="Dark28 Logo"
         priority
       />
@@ -27,10 +27,36 @@ function Logo() {
 export default function PageHeader({
   backHref
 }: PageHeaderProps) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuMounted, setIsMenuMounted] = useState(false);
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const primaryButtonClass =
+    "rounded-full bg-black px-4 py-3 text-sm font-bold text-white hover:scale-110 transition-transform duration-200 ease-in-out";
+  const secondaryButtonClass =
+    "rounded-full bg-(--color-yellow) px-4 py-3 text-sm font-bold text-black hover:scale-110 transition-transform duration-200 ease-in-out";
+  const roundButtonClass =
+    "flex h-12 w-12 items-center justify-center rounded-full bg-black text-lg font-extrabold text-white hover:scale-130 transition-transform duration-200 ease-in-out";
+  function openMenu() {
+    setIsMenuMounted(true);
+  }
 
   function closeMenu() {
-    setIsMenuOpen(false);
+    setIsMenuVisible(false);
+  }
+
+  useEffect(() => {
+    if (isMenuMounted) {
+      const id = requestAnimationFrame(() => {
+        setIsMenuVisible(true);
+      });
+
+      return () => cancelAnimationFrame(id);
+    }
+  }, [isMenuMounted]);
+
+  function handleTransitionEnd() {
+    if (!isMenuVisible) {
+      setIsMenuMounted(false);
+    }
   }
 
   return (
@@ -40,7 +66,7 @@ export default function PageHeader({
           {backHref ? (
             <Link
               href={backHref}
-              className="rounded-full bg-(--color-yellow) px-4 py-2 text-2xl font-bold text-black"
+              className={roundButtonClass}
               aria-label="Go back"
             >
               ⬅
@@ -48,7 +74,7 @@ export default function PageHeader({
           ) : (
             <div
               aria-hidden="true"
-              className="invisible rounded-full bg-(--color-yellow) px-4 py-2 text-2xl font-bold"
+              className={roundButtonClass+" invisible"}
             >
               ⬅
             </div>
@@ -59,25 +85,32 @@ export default function PageHeader({
           <button
             type="button"
             aria-label="Open menu"
-            aria-expanded={isMenuOpen}
-            onClick={() => setIsMenuOpen(true)}
-            className="rounded-full bg-(--color-text) px-4 py-2 text-sm font-bold text-(--color-bg)"
+            aria-expanded={isMenuVisible}
+            onClick={openMenu}
+            className={roundButtonClass}
           >
-            Menu
+            ☰
           </button>
         </div>
       </header>
 
-      {isMenuOpen && (
+      {isMenuMounted && (
         <>
           <button
             type="button"
             aria-label="Close menu overlay"
             onClick={closeMenu}
-            className="fixed inset-0 z-40 bg-black/40"
+            className={`fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 ${
+              isMenuVisible ? "opacity-100" : "opacity-0"
+            }`}
           />
 
-          <aside className="fixed right-0 top-0 z-50 flex h-full w-72 flex-col gap-6 bg-white p-6 shadow-2xl">
+          <aside
+            onTransitionEnd={handleTransitionEnd}
+            className={`fixed right-0 top-0 z-50 flex h-full w-72 flex-col gap-6 bg-white p-6 shadow-2xl transition-transform duration-700 ease-in-out ${
+              isMenuVisible ? "translate-x-0" : "translate-x-full"
+            }`}
+          >
             <div className="flex items-center justify-between">
               <div
                 className="text-2xl font-bold"
@@ -90,7 +123,7 @@ export default function PageHeader({
                 type="button"
                 aria-label="Close menu"
                 onClick={closeMenu}
-                className="rounded-full bg-(--color-text) px-3 py-2 text-sm font-bold text-(--color-bg)"
+                className={roundButtonClass}
               >
                 ✕
               </button>
@@ -100,7 +133,7 @@ export default function PageHeader({
               <Link
                 href="/"
                 onClick={closeMenu}
-                className="rounded-full bg-(--color-yellow) px-4 py-3 text-sm font-bold text-black"
+              className={secondaryButtonClass}
               >
                 Home
               </Link>
@@ -108,32 +141,34 @@ export default function PageHeader({
               <Link
                 href="/about"
                 onClick={closeMenu}
-                className="rounded-full bg-(--color-burgundy) px-4 py-3 text-sm font-bold text-(--color-bg)"
+                className={secondaryButtonClass}
               >
                 About
+              </Link>
+
+
+              <Link
+                href="/plan"
+                onClick={closeMenu}
+                className={secondaryButtonClass}
+              >
+                My Plan
+              </Link>
+
+              <Link
+                href="/profile"
+                onClick={closeMenu}
+                className={secondaryButtonClass}
+              >
+                Profile
               </Link>
 
               <Link
                 href="/route"
                 onClick={closeMenu}
-                className="rounded-full bg-(--color-text) px-4 py-3 text-sm font-bold text-(--color-bg)"
+                className={primaryButtonClass}
               >
                 Explore Route
-              </Link>
-
-              <Link
-                href="/plan"
-                onClick={closeMenu}
-                className="rounded-full  p-2 text-sm font-bold text-black"
-              >
-                My Plan
-              </Link>
-              <Link
-                href="/profile"
-                onClick={closeMenu}
-                className="rounded-full p-2 pt-1 text-sm font-bold text-black"
-              >
-                Profile
               </Link>
             </nav>
           </aside>
