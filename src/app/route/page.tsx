@@ -6,6 +6,8 @@ import { useMemo } from "react";
 import CategoryBadge from "@/components/CategoryBadge";
 import LandmarkCard from "@/components/LandmarkCard";
 import PageHeader from "@/components/PageHeader";
+import PageContainer from "@/components/PageContainer";
+import SectionCard from "@/components/SectionCard";
 
 export default function RoutePage() {
   const router = useRouter();
@@ -38,9 +40,10 @@ export default function RoutePage() {
   return (
     <main className="min-h-screen bg-(--color-bg) text-(--color-text)">
       <PageHeader backHref="/" />
-      <div className="max-w-xl mx-auto flex flex-col items-center justify-center p-10">
+      <PageContainer>
+
         <h1
-          className="text-4xl font-black mb-6"
+          className="text-4xl font-black mb-6 text-center md:text-5xl"
           style={{ fontFamily: "var(--font-headline)" }}
         >
           Explore the Route
@@ -52,7 +55,11 @@ export default function RoutePage() {
         >
           Discover the overlooked histories hidden across Lisbon.
         </h2>
-
+        <div className="flex flex-col justify-center border border-black/10 p-4 pb-2 rounded-lg">
+        <p className="mb-1 text-center text-sm text-black/60">
+          Showing {filteredLandmarks.length} landmark
+          {filteredLandmarks.length === 1 ? "" : "s"}
+        </p>
         <div className="mb-8 flex flex-wrap justify-center gap-2">
           <button
             type="button"
@@ -66,34 +73,34 @@ export default function RoutePage() {
             All
           </button>
           {categories.map((category) => (
-              <button
-                key={category.id}
-                type="button"
-                onClick={() => handleCategoryChange(category.id)}
-                className={`rounded-full px-4 py-2 text-sm font-bold transition ${
-                  activeCategory === category.id
-                    ? "bg-(--color-text) text-(--color-bg)"
-                    : "bg-(--color-burgundy) text-white border border-black/10 text-sm"
-                }`}
-              >
-                {category.label}
-              </button>
+            <button
+              key={category.id}
+              type="button"
+              onClick={() => handleCategoryChange(category.id)}
+              className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+                activeCategory === category.id
+                ? "bg-(--color-text) text-(--color-bg)"
+                : "bg-white text-black border border-black/10"
+              }`}
+            >
+              {category.label}
+            </button>
           ))}
-        </div>
-        <p className="mb-6 text-sm text-black/60">
-          Showing {filteredLandmarks.length} landmark
-          {filteredLandmarks.length === 1 ? "" : "s"}
-        </p>
-        <div className="flex flex-col gap-4">
-          {filteredLandmarks.map((landmark) => (
-            <LandmarkCard
-              key={landmark.id}
-              landmark={landmark}
-              activeCategory={activeCategory}
-            />
-          ))}
+        
         </div>
       </div>
+        
+      </PageContainer>
+      <div className="flex flex-wrap w-full gap-4 px-70 justify-center">
+        {filteredLandmarks.map((landmark) => (
+          <LandmarkCard
+            key={landmark.id}
+            landmark={landmark}
+            activeCategory={activeCategory}
+          />
+        ))}
+      </div>
+      
     </main>
   );
 }

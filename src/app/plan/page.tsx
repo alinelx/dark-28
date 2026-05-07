@@ -8,6 +8,8 @@ import PageHeader from "@/components/PageHeader";
 import PlanButton from "@/components/PlanButton";
 import SectionCard from "@/components/SectionCard";
 import CategoryBadge from "@/components/CategoryBadge";
+import PageContainer from "@/components/PageContainer";
+import VisitedButton from "@/components/VisitedButton";
 
 export default function PlanPage() {
   const { plannedIds, direction, setDirection, clearPlan } = usePlan();
@@ -25,8 +27,8 @@ export default function PlanPage() {
   return (
     <main className="min-h-screen bg-(--color-bg) text-(--color-text)">
       <PageHeader backHref="/"/>
-
-      <section className="mx-auto flex max-w-3xl flex-col gap-6 px-6 py-10">
+      <PageContainer>
+      <div className="mx-auto flex flex-col gap-6 px-6 py-10 items-center text-center">
         <h1
           className="text-4xl font-black md:text-5xl"
           style={{ fontFamily: "var(--font-headline)" }}
@@ -42,46 +44,20 @@ export default function PlanPage() {
         </p>
 
         <div className="flex flex-col gap-3">
-          <p className="text-sm font-semibold text-black/70">Tram 28 direction</p>
-
-          <div className="flex flex-wrap gap-2">
-            <button
-              type="button"
-              onClick={() => setDirection("co-to-mm")}
-              className={`rounded-full px-4 py-2 text-sm font-bold transition ${
-                direction === "co-to-mm"
-                  ? "bg-(--color-text) text-(--color-bg)"
-                  : "bg-white text-black border border-black/10"
-              }`}
-            >
-              Campo Ourique → Martim Moniz
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setDirection("mm-to-co")}
-              className={`rounded-full px-4 py-2 text-sm font-bold transition ${
-                direction === "mm-to-co"
-                  ? "bg-(--color-text) text-(--color-bg)"
-                  : "bg-white text-black border border-black/10"
-              }`}
-            >
-              Martim Moniz → Campo Ourique
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => setDirection(direction === "co-to-mm" ? "mm-to-co" : "co-to-mm")}
+            className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+              direction === "co-to-mm"
+                ? "bg-(--color-text) text-(--color-bg)"
+                : "bg-white text-black border border-black/10"
+            }`}
+          >
+            {direction === "co-to-mm"
+                ? "Campo de Ourique → Martim Moniz"
+                : "Martim Moniz → Campo de Ourique"}
+          </button>
         </div>
-
-        {plannedLandmarks.length > 0 && (
-          <div className="flex justify-end">
-            <button
-              type="button"
-              onClick={clearPlan}
-              className="rounded-full bg-(--color-text) px-4 py-2 text-sm font-bold text-(--color-bg)"
-            >
-              Clear plan
-            </button>
-          </div>
-        )}
 
         {plannedLandmarks.length === 0 ? (
           <SectionCard title="No saved landmarks yet">
@@ -100,7 +76,7 @@ export default function PlanPage() {
           plannedLandmarks.map((plannedLandmark) => (
             <div
               key={plannedLandmark.id}
-              className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm"
+              className="rounded-2xl flex flex-wrap w-full border border-black/10 bg-white p-6 shadow-sm"
             >
               <div className="flex flex-col gap-3">
                 <h2
@@ -109,7 +85,7 @@ export default function PlanPage() {
                 >
                   {plannedLandmark.title}
                 </h2>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap justify-center gap-2">
                   {plannedLandmark.category.map((cat) => {
                     const category = categories.find((c) => c.id === cat);
 
@@ -131,15 +107,15 @@ export default function PlanPage() {
                     Estimated visit time: {plannedLandmark.estimatedVisitTime}
                   </p>
                 )}
-
+                <VisitedButton landmarkId={plannedLandmark.id} /> 
                 <p>{plannedLandmark.summary}</p>
 
-                <div className="flex flex-wrap gap-3 pt-2">
+                <div className="flex flex-wrap justify-center gap-3 pt-2">
                   <Link
                     href={`/route/${plannedLandmark.slug}`}
                     className="rounded-full border border-(--color-yellow) bg-white px-4 py-2 text-sm font-bold text-black"
                   >
-                    View details
+                    View
                   </Link>
 
                   <PlanButton landmarkId={plannedLandmark.id} />
@@ -148,7 +124,20 @@ export default function PlanPage() {
             </div>
           ))
         )}
-      </section>
+        {plannedLandmarks.length > 0 && (
+        <div className="flex justify-center pt-4">
+          <button
+            type="button"
+            onClick={clearPlan}
+            className="rounded-full bg-(--color-text) px-4 py-2 text-sm font-bold text-(--color-bg)"
+          >
+            Clear plan
+          </button>
+        </div>
+      )}
+      </div>
+
+      </PageContainer>
     </main>
   );
 }

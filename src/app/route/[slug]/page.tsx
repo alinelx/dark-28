@@ -10,6 +10,7 @@ import CategoryBadge from "@/components/CategoryBadge";
 import HistoricalContextPreview from "@/components/Preview";
 import PlanButton from "@/components/PlanButton";
 import VisitedButton from "@/components/VisitedButton";
+import PageContainer from "@/components/PageContainer";
 
 type LandmarkDetailPageProps = {
   params: Promise<{
@@ -42,11 +43,16 @@ export default async function LandmarkDetailPage({
         : undefined;
 
     return (
-        <main className="min-h-screen bg-(--color-bg) text-(--color-text)">
+        <main className="min-h-screen bg-(--color-bg) gap-4 text-(--color-text)">
             <PageHeader backHref={backHref} />
-            <SectionCard title={landmark.title}>
-                <div className="flex flex-col gap-auto items-center m-3">
-                    <div className="flex flex-row gap-4 pb-4 items-center">
+            <PageContainer>
+                <div className="flex flex-col gap-4 items-center justify-center">
+                <SectionCard title="">
+                    <div className="flex flex-col gap-4 items-center justify-center">
+                        <h1 className="text-4xl font-bold" style={{ fontFamily: "var(--font-headline)" }}>
+                        {landmark.title}
+                        </h1>
+                        <div className="flex flex-row gap-4 pb-4 items-center">
                         {landmark.category.map((cat) => {
                         const category = categories.find((item) => item.id === cat);
 
@@ -58,9 +64,9 @@ export default async function LandmarkDetailPage({
                             />
                         );
                         })}
-                    </div>
-                    {landmark.imageUrl && (
-                    <figure className="overflow-hidden p-4 rounded-2xl border border-black/10 bg-white shadow-sm">
+                        </div>
+                        {landmark.imageUrl && (
+                        <figure className="overflow-hidden p-4 m-4 rounded-2xl border border-black/10 bg-white shadow-sm">
                         <div className="relative w-full">
                             <Image
                             src={landmark.imageUrl}
@@ -77,26 +83,29 @@ export default async function LandmarkDetailPage({
                             </figcaption>
                         )}
                         </figure>
-                    )}
-                    <div className="flex flex-row gap-2 p-4 items-center justify-center">
-                        <span className="text-sm rounded-full px-3 font-bold text-black bg-(--color-gold) p-2 items-center justify-center flex">
-                        {landmark.locationName} • {landmark.type}
-                        </span>
-                        <span className="text-sm font-bold text-black pt-0 p-2 items-center justify-center flex">
-                        {landmark.price && <span>{landmark.price}</span>}
-                        {landmark.estimatedVisitTime && (
-                        <>
-                        <span>|</span>
-                        <span>{landmark.estimatedVisitTime}</span>
-                        </>
-                        )}</span>
+                        )}
                     </div>
-                    <div className="flex justify-center gap-3 pt-2">
+                </SectionCard>
+                    
+                <div className="flex flex-col gap-2 p-4 items-center justify-center">
+                    <span className="text-sm rounded-full px-3 font-bold text-black bg-(--color-gold) p-2 items-center justify-center flex">
+                    {landmark.locationName} • {landmark.type}
+                    </span>
+                    <span className="text-sm font-bold text-black pt-0 p-2 items-center justify-center flex">
+                    {landmark.price && <span>{landmark.price}</span>}
+                    <br/>
+                    {landmark.estimatedVisitTime && (
+                    <>
+                    <span>|</span>
+                    <span>{landmark.estimatedVisitTime}</span>
+                    </>
+                    )}</span>
+                </div>
+                <div className="flex justify-center gap-3 pt-2">
                     <PlanButton landmarkId={landmark.id} />
                     <VisitedButton landmarkId={landmark.id} />
-                    </div>
                 </div>
-            </SectionCard>
+                </div>
             {landmark.routeStopCO && landmark.routeStopMM && (
                 <SectionCard title="Tram 28 - Nearby Stops">
                     <div className="flex flex-col gap-4 p-4 items-center justify-center">
@@ -169,7 +178,9 @@ export default async function LandmarkDetailPage({
                         )}
                     </div>
                 </SectionCard>
-            )}
+            )}~
+
+            </PageContainer>
             {nextLandmark && (
                 <footer className="border border-black/10 bg-white p-6 shadow-sm">
                     <h2

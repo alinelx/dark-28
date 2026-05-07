@@ -21,7 +21,7 @@ export default function PlanButton({ landmarkId }: PlanButtonProps) {
           : "bg-(--color-yellow) text-black"
       }`}
     >
-      {planned ? "Remove from plan" : "Add to plan"}
+      {planned ? "Remove" : "Add to plan"}
     </button>
   );
 }

@@ -21,7 +21,7 @@ export default function VisitedButton({ landmarkId }: VisitedButtonProps) {
           : "bg-white border border-(--color-burgundy) text-black"
       }`}
     >
-      {visited ? "Visited" : "Mark as visited"}
+      {visited ? "Visited" : "Check in"}
     </button>
   );
 }

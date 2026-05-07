@@ -69,14 +69,14 @@ export default function PageHeader({
               className={roundButtonClass}
               aria-label="Go back"
             >
-              ⬅
+              ⏴
             </Link>
           ) : (
             <div
               aria-hidden="true"
               className={roundButtonClass+" invisible"}
             >
-              ⬅
+              ⏴
             </div>
           )}
 
