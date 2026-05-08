@@ -53,16 +53,16 @@ export default function RoutePage() {
         >
           Discover the overlooked histories hidden across Lisbon.
         </h2>
-        <div className="flex flex-col justify-center border border-black/10 p-4 pb-2 rounded-lg">
-        <p className="mb-1 text-center text-sm text-black/60">
+        <div className="flex flex-col border border-black/10 p-4 gap-1 rounded-lg">
+        <p className="text-center text-sm text-black/60">
           Showing {filteredLandmarks.length} landmark
           {filteredLandmarks.length === 1 ? "" : "s"}
         </p>
-        <div className="mb-8 flex flex-wrap justify-center gap-2">
+        <div className="flex flex-row p-4 overflow-x-auto gap-4">
           <button
             type="button"
             onClick={() => handleCategoryChange("all")}
-            className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+            className={`rounded-full px-4 py-2 text-sm w-fit font-bold transition ${
               activeCategory === "all"
                 ? "bg-(--color-text) text-(--color-bg)"
                 : "bg-white text-black border border-black/10"
@@ -75,7 +75,7 @@ export default function RoutePage() {
               key={category.id}
               type="button"
               onClick={() => handleCategoryChange(category.id)}
-              className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+              className={`rounded-full px-4 py-2 text-sm w-fit text-nowrap font-bold transition ${
                 activeCategory === category.id
                 ? "bg-(--color-text) text-(--color-bg)"
                 : "bg-white text-black border border-black/10"

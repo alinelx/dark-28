@@ -18,7 +18,7 @@ export default function AboutPage() {
           >
             Dark28 offers a unique perspective on Lisbon’s cultural landscape by highlighting stories that are often marginalized or forgotten.
           </p>
-        <div className="mt-10 flex w- items-center flex-col gap-6">
+        <div className="mt-10 flex items-center flex-col gap-6">
         <SectionCard title="What is Dark28?">
           <p>
             Dark28 is a digital cultural heritage project that reimagines Lisbon’s
