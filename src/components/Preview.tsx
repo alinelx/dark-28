@@ -31,19 +31,19 @@ export default function HistoricalContextPreview({
       </div>
 
       {!isExpanded && shouldTruncate && (
-        <div className="absolute z-10 top-20 left-1/2 transform -translate-x-1/2 flex justify-center">
+        <div className="absolute z-10 left-1/2 transform -translate-x-1/2 -translate-y-20 flex justify-center">
           <button
             type="button"
             onClick={() => setIsExpanded(true)}
             className="rounded-full bg-black px-4 py-2 text-sm font-bold text-white shadow-md"
           >
-            Continue reading to unlock the full historical context.
+            Click to unlock
           </button>
         </div>
       )}
 
       {isExpanded && shouldTruncate && (
-        <div className="mt-4">
+        <div className="mt-4 flex justify-center">
           <button
             type="button"
             onClick={() => setIsExpanded(false)}

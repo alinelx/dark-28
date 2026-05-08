@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { landmarks } from "@/data/landmarks";
 import { categories } from "@/data/categories";
 import { usePlan } from "@/hooks/usePlan";
@@ -10,11 +11,16 @@ import SectionCard from "@/components/SectionCard";
 import CategoryBadge from "@/components/CategoryBadge";
 import PageContainer from "@/components/PageContainer";
 import VisitedButton from "@/components/VisitedButton";
+import DirectionButton from "@/components/DirectionButton";
+import { Landmark } from "@/types";
+
+type PlannerProps = {
+  landmark: Landmark;
+};
 
 export default function PlanPage() {
-  const { plannedIds, direction, setDirection, clearPlan } = usePlan();
-
-  const plannedLandmarks = landmarks
+    const { plannedIds, direction, isVisited, clearPlan } = usePlan();
+    const plannedLandmarks = landmarks
     .filter((landmark) => plannedIds.includes(landmark.id))
     .sort((a, b) => {
       if (direction === "mm-to-co") {
@@ -23,8 +29,11 @@ export default function PlanPage() {
 
       return a.id - b.id;
     });
-
-  return (
+    if (!landmark) {
+        notFound();
+    } 
+    const visited = isVisited(landmark.id);
+    return ( 
     <main className="min-h-screen bg-(--color-bg) text-(--color-text)">
       <PageHeader backHref="/"/>
       <PageContainer>
@@ -44,19 +53,7 @@ export default function PlanPage() {
         </p>
 
         <div className="flex flex-col gap-3">
-          <button
-            type="button"
-            onClick={() => setDirection(direction === "co-to-mm" ? "mm-to-co" : "co-to-mm")}
-            className={`rounded-full px-4 py-2 text-sm font-bold transition ${
-              direction === "co-to-mm"
-                ? "bg-(--color-text) text-(--color-bg)"
-                : "bg-white text-black border border-black/10"
-            }`}
-          >
-            {direction === "co-to-mm"
-                ? "Campo de Ourique → Martim Moniz"
-                : "Martim Moniz → Campo de Ourique"}
-          </button>
+          <DirectionButton />
         </div>
 
         {plannedLandmarks.length === 0 ? (
@@ -73,10 +70,10 @@ export default function PlanPage() {
             </Link>
           </SectionCard>
         ) : (
-          plannedLandmarks.map((plannedLandmark) => (
+          plannedLandmarks.map((plannedLandmark) =>  (
             <div
               key={plannedLandmark.id}
-              className="rounded-2xl flex flex-wrap w-full border border-black/10 bg-white p-6 shadow-sm"
+              className={`rounded-full px-4 py-2 text-sm font-bold transition  ${visited ? 'bg-(--color-gold)' :'bg-white'}`}
             >
               <div className="flex flex-col gap-3">
                 <h2

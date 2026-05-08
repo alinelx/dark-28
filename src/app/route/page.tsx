@@ -3,11 +3,9 @@ import { landmarks } from "@/data/landmarks";
 import { categories } from "@/data/categories";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useMemo } from "react";
-import CategoryBadge from "@/components/CategoryBadge";
 import LandmarkCard from "@/components/LandmarkCard";
 import PageHeader from "@/components/PageHeader";
 import PageContainer from "@/components/PageContainer";
-import SectionCard from "@/components/SectionCard";
 
 export default function RoutePage() {
   const router = useRouter();
@@ -91,7 +89,7 @@ export default function RoutePage() {
       </div>
         
       </PageContainer>
-      <div className="flex flex-wrap w-full gap-4 px-70 justify-center">
+      <div className="flex flex-wrap w-full gap-4 p-4 justify-center">
         {filteredLandmarks.map((landmark) => (
           <LandmarkCard
             key={landmark.id}
