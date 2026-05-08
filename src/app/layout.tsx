@@ -37,9 +37,28 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${inter.variable} ${playfair.variable} ${cormorant.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem("dark28-theme");
+                  var systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                  var resolved = saved === "light" || saved === "dark"
+                    ? saved
+                    : (systemDark ? "dark" : "light");
+                  document.documentElement.setAttribute("data-theme", resolved);
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

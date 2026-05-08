@@ -18,7 +18,7 @@ export default function PlanButton({ landmarkId }: PlanButtonProps) {
       className={`rounded-full px-3 py-2 text-sm font-bold ${
         planned
           ? "bg-(--color-text) text-(--color-bg)"
-          : "bg-(--color-yellow) text-black"
+          : "bg-(--color-yellow) text-(--color-text)"
       }`}
     >
       {planned ? "Remove" : "Add to plan"}

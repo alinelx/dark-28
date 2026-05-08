@@ -7,15 +7,17 @@ const DIRECTION_KEY = "dark28-plan-direction";
 const PLAN_EVENT = "dark28-plan-updated";
 
 const EMPTY_PLAN: number[] = [];
-const DEFAULT_DIRECTION = "co-to-mm";
+const DEFAULT_DIRECTION: RouteDirection = "co-to-mm";
 
 const VISITED_KEY = "dark28-visited";
 const EMPTY_VISITED: number[] = [];
 
+type RouteDirection = "co-to-mm" | "mm-to-co";
+
 type PlanStoreSnapshot = {
   plannedIds: number[];
   visitedIds: number[];
-  direction: string;
+  direction: RouteDirection;
 };
 
 const EMPTY_SNAPSHOT: PlanStoreSnapshot = {
@@ -59,7 +61,7 @@ function parseVisited(raw: string | null): number[] {
   }
 }
 
-function parseDirection(raw: string | null): string {
+function parseDirection(raw: string | null): RouteDirection {
   if (raw === "co-to-mm" || raw === "mm-to-co") {
     return raw;
   }
@@ -176,7 +178,7 @@ function writeVisited(nextIds: number[]) {
   }
 }
 
-function writeDirection(nextDirection: string) {
+function writeDirection(nextDirection: RouteDirection) {
   if (typeof window === "undefined") return;
 
   try {
@@ -244,13 +246,9 @@ export function usePlan() {
     writeVisited([]);
   }
 
-  function setDirection(nextDirection: string) {
-    if (nextDirection !== "co-to-mm" && nextDirection !== "mm-to-co") {
-      return;
-    }
-
-    writeDirection(nextDirection);
-  }
+function setDirection(nextDirection: RouteDirection) {
+  writeDirection(nextDirection);
+}
 
   function clearPlan() {
     writePlan([]);

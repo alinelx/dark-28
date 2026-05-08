@@ -35,7 +35,7 @@ export default async function LandmarkDetailPage({
         <main className="min-h-screen bg-(--color-bg) gap-4 text-(--color-text)">
             <PageHeader backHref={backHref} />
             <LandmarkDetail landmark={landmark}/>
-            <NextStop landmark={landmark}/>
+            <NextStop landmark={landmark} category={category} />
         </main>
     );
 }

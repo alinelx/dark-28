@@ -19,15 +19,13 @@ type LandmarkDetailProps = {
 };
 
 export default function LandmarkDetail({ landmark }: LandmarkDetailProps) {
-  const { isVisited } = usePlan();
+  const { isVisited, isPlanned, direction } = usePlan();
   const visited = isVisited(landmark.id);
-  const { isPlanned } = usePlan();
   const planned = isPlanned(landmark.id);
-  const { direction } = usePlan();
   return (
       <PageContainer>
         <DirectionButton/>
-        <div className={`rounded-2xl flex flex-col mt-5 gap-4 p-4 items-center justify-center  ${visited ? 'bg-(--color-gold)' : planned ? 'bg-white border-2 border-(--color-burgundy)' : 'bg-white'}`}>
+        <div className={`rounded-2xl flex flex-col mt-5 gap-4 p-4 items-center justify-center  ${visited ? 'bg-(--color-gold)' : planned ? 'bg-(--color-surface) border-2 border-(--color-burgundy)' : 'bg-(--color-surface)'}`}>
             <h1 className="text-4xl font-bold text-center" style={{ fontFamily: "var(--font-headline)" }}>
             {landmark.title}
             </h1>
@@ -45,7 +43,7 @@ export default function LandmarkDetail({ landmark }: LandmarkDetailProps) {
             })}
             </div>
             {landmark.imageUrl && (
-            <figure className="overflow-hidden p-4 m-4 rounded-2xl border border-black/10 bg-white shadow-sm">
+            <figure className="overflow-hidden p-4 m-4 rounded-2xl border border-black/10 bg-(--color-surface) shadow-sm">
             <div className="relative w-full">
                 <Image
                 src={landmark.imageUrl}
@@ -57,7 +55,7 @@ export default function LandmarkDetail({ landmark }: LandmarkDetailProps) {
             </div>
 
             {landmark.imageCaption && (
-                <figcaption className="px-4 py-3 text-xs text-black/70">
+                <figcaption className="px-4 py-3 text-xs text-(--color-text)/70">
                 {landmark.imageCaption}
                 </figcaption>
             )}
@@ -69,10 +67,10 @@ export default function LandmarkDetail({ landmark }: LandmarkDetailProps) {
             </div>
         </div>
         <div className="flex flex-col gap-2 p-4 items-center justify-center">
-            <span className="text-sm p-3 font-bold text-black flex">
+            <span className="text-sm p-3 font-bold text-(--color-text) flex">
             {landmark.locationName} • {landmark.type}
             </span>
-            <span className="text-sm font-bold text-black pt-0 p-2 gap-2 flex">
+            <span className="text-sm font-bold text-(--color-text) pt-0 p-2 gap-2 flex">
             {landmark.price && 
             <span>{landmark.price}</span>
             }
@@ -88,7 +86,7 @@ export default function LandmarkDetail({ landmark }: LandmarkDetailProps) {
             <span className={`rounded-full px-4 py-2 text-sm flex-wrap text-center font-bold transition ${
                 direction === "co-to-mm"
                 ? "bg-(--color-text) text-(--color-bg)"
-                : "bg-white text-black border border-black/10"
+                : "bg-(--color-surface) text-(--color-text) border border-black/10"
             }`}>
             {direction === "co-to-mm"
             ? `${landmark.routeStopMM} - ${getRouteMMInfo(landmark.routeStopMM)?.stopDetails.stop_name}`
@@ -120,7 +118,7 @@ export default function LandmarkDetail({ landmark }: LandmarkDetailProps) {
                     {landmark.tags.map((tag) => (
                         <span
                         key={tag}
-                        className="rounded-full bg-black/5 px-3 py-1 text-sm"
+                        className="rounded-full bg-(--color-text)/5 px-3 py-1 text-sm"
                         >
                         {tag}
                         </span>

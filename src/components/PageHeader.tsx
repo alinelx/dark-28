@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import ThemeToggle from "@/components/ThemeToggle";
 
 type PageHeaderProps = {
   backHref?: string;
-  backLabel?: string;
 };
 
 function Logo() {
@@ -30,13 +30,19 @@ export default function PageHeader({
   const [isMenuMounted, setIsMenuMounted] = useState(false);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const primaryButtonClass =
-    "rounded-full bg-black px-4 py-3 text-sm font-bold text-white hover:scale-110 transition-transform duration-200 ease-in-out";
+    "rounded-full bg-(--color-text) px-4 py-3 text-sm font-bold text-(--color-surface) hover:scale-110 transition-transform duration-200 ease-in-out";
   const secondaryButtonClass =
-    "rounded-full bg-(--color-yellow) px-4 py-3 text-sm font-bold text-black hover:scale-110 transition-transform duration-200 ease-in-out";
+    "rounded-full bg-(--color-yellow) px-4 py-3 text-sm font-bold text-(--color-text) hover:scale-110 transition-transform duration-200 ease-in-out";
   const roundButtonClass =
-    "flex h-12 w-12 items-center justify-center rounded-full bg-black text-lg font-extrabold text-white hover:scale-130 transition-transform duration-200 ease-in-out";
+    "flex h-12 w-12 items-center justify-center rounded-full bg-(--color-text) text-lg font-extrabold text-(--color-surface) hover:scale-130 transition-transform duration-200 ease-in-out";
   function openMenu() {
     setIsMenuMounted(true);
+  }
+
+  function handleTransitionEnd() {
+    if (!isMenuVisible) {
+      setIsMenuMounted(false);
+    }
   }
 
   function closeMenu() {
@@ -44,20 +50,20 @@ export default function PageHeader({
   }
 
   useEffect(() => {
-    if (isMenuMounted) {
-      const id = requestAnimationFrame(() => {
-        setIsMenuVisible(true);
-      });
+    if (!isMenuMounted) return;
 
-      return () => cancelAnimationFrame(id);
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
     }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, [isMenuMounted]);
-
-  function handleTransitionEnd() {
-    if (!isMenuVisible) {
-      setIsMenuMounted(false);
-    }
-  }
 
   return (
     <>
@@ -85,6 +91,7 @@ export default function PageHeader({
           <button
             type="button"
             aria-label="Open menu"
+            aria-controls="site-menu"
             aria-expanded={isMenuVisible}
             onClick={openMenu}
             className={roundButtonClass}
@@ -100,14 +107,16 @@ export default function PageHeader({
             type="button"
             aria-label="Close menu overlay"
             onClick={closeMenu}
-            className={`fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 ${
+            className={`fixed inset-0 z-40 bg-(--color-text)/40 transition-opacity duration-300 ${
               isMenuVisible ? "opacity-100" : "opacity-0"
             }`}
           />
 
           <aside
+            id="site-menu"
+            aria-label="Main menu"
             onTransitionEnd={handleTransitionEnd}
-            className={`fixed right-0 top-0 z-50 flex h-full w-72 flex-col gap-6 bg-white p-6 shadow-2xl transition-transform duration-700 ease-in-out ${
+            className={`fixed right-0 top-0 z-50 flex h-full w-72 flex-col gap-6 bg-(--color-surface) p-6 shadow-2xl transition-transform duration-700 ease-in-out ${
               isMenuVisible ? "translate-x-0" : "translate-x-full"
             }`}
           >
@@ -128,7 +137,10 @@ export default function PageHeader({
                 ✕
               </button>
             </div>
-
+            <div className="flex flex-col gap-3">
+              <p className="text-sm font-semibold text-(--color-text)/60">Theme</p>
+              <ThemeToggle />
+            </div>
             <nav className="flex flex-col gap-3">
               <Link
                 href="/"

@@ -10,7 +10,7 @@ export default function SectionCard({
     children,
 }: SectionCardProps) {
     return (
-        <section className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
+        <section className="rounded-2xl border border-black/10 bg-(--color-surface) p-6 shadow-sm">
         <h2
             className="mb-3 text-2xl font-semibold"
             style={{ fontFamily: "var(--font-accent)" }}

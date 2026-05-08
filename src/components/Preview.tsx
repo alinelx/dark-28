@@ -35,7 +35,7 @@ export default function HistoricalContextPreview({
           <button
             type="button"
             onClick={() => setIsExpanded(true)}
-            className="rounded-full bg-black px-4 py-2 text-sm font-bold text-white shadow-md"
+            className="rounded-full bg-(--color-text) px-4 py-2 text-sm font-bold text-(--color-surface) shadow-md"
           >
             Continue reading
           </button>
@@ -47,7 +47,7 @@ export default function HistoricalContextPreview({
           <button
             type="button"
             onClick={() => setIsExpanded(false)}
-            className="rounded-full bg-(--color-yellow) px-4 py-2 text-sm font-bold text-black shadow-md"
+            className="rounded-full bg-(--color-yellow) px-4 py-2 text-sm font-bold text-(--color-text) shadow-md"
           >
             Show less
           </button>

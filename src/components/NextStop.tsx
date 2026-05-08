@@ -1,53 +1,65 @@
+"use client";
+
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { landmarks } from "@/data/landmarks";
 import PageContainer from "@/components/PageContainer";
 import type { Landmark } from "@/types/landmark";
-
+import { usePlan } from "@/hooks/usePlan";
 
 type NextStopProps = {
   landmark: Landmark;
+  category?: string;
 };
 
-export default function NextStop({ landmark }: NextStopProps) {
+export default function NextStop({ landmark, category }: NextStopProps) {
+  const { direction } = usePlan();
 
-    if (!landmark) {
-        notFound();
-    }
+  const currentIndex = landmarks.findIndex((item) => item.id === landmark.id);
 
-    const nextLandmark = landmark.nextLandId
-        ? landmarks.find((item) => item.id === landmark.nextLandId)
-        : undefined;
+  if (currentIndex === -1) return null;
 
-    return ( 
-    nextLandmark && (
-        <footer className="border border-black/10 bg-white p-6 shadow-sm">
-            <PageContainer>
-            <h2
-            className="mb-4 text-2xl font-semibold justify-center flex"
-            style={{ fontFamily: "var(--font-accent)" }}
+  const targetIndex =
+    direction === "co-to-mm" ? currentIndex + 1 : currentIndex - 1;
+
+  const adjacentLandmark = landmarks[targetIndex];
+
+  if (!adjacentLandmark) return null;
+
+  const href = category
+    ? `/route/${adjacentLandmark.slug}?category=${category}`
+    : `/route/${adjacentLandmark.slug}`;
+
+  return (
+    <footer className="border border-black/10 bg-(--color-surface) p-6 shadow-sm">
+      <PageContainer>
+        <h2
+          className="mb-4 flex justify-center text-2xl font-semibold"
+          style={{ fontFamily: "var(--font-accent)" }}
+        >
+          {direction === "co-to-mm" ? "Next Stop" : "Previous Stop"}
+        </h2>
+
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <p className="text-sm text-(--color-text)/60">
+              {direction === "co-to-mm" ? "Up next" : "Just before this"}
+            </p>
+            <p
+              className="text-2xl font-semibold"
+              style={{ fontFamily: "var(--font-headline)" }}
             >
-            Next Stop
-            </h2>
-            <div className="flex items-center justify-between gap-4">
-                <div>
-                    <p className="text-sm text-black/60">Up next</p>
-                    <p
-                    className="text-2xl font-semibold"
-                    style={{ fontFamily: "var(--font-headline)" }}
-                    >
-                    {nextLandmark.title}
-                    </p>
-                </div>
-                <Link
-                    href={`/route/${nextLandmark.slug}`}
-                    className="rounded-full bg-(--color-yellow) px-4 py-2 text-sm font-semibold text-black"
-                >
-                    View
-                </Link>
-            </div>
-            </PageContainer>
-        </footer>
-    )
-)
+              {adjacentLandmark.title}
+            </p>
+          </div>
+
+          <Link
+            href={href}
+            className="rounded-full bg-(--color-yellow) px-4 py-2 text-sm font-semibold text-(--color-text)"
+          >
+            View
+          </Link>
+        </div>
+      </PageContainer>
+    </footer>
+  );
 }

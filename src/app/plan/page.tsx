@@ -30,7 +30,7 @@ export default function PlanPage() {
       <PageContainer>
         <div className="mx-auto flex flex-col gap-6 px-6 py-10 items-center text-center">
           <h1
-            className="text-4xl font-black md:text-5xl"
+            className="text-4xl text-(--color-text) md:text-5xl"
             style={{ fontFamily: "var(--font-headline)" }}
           >
             My Plan
@@ -70,12 +70,12 @@ export default function PlanPage() {
                   className={`w-full rounded-2xl border p-5 text-sm transition ${
                     visited
                       ? "bg-(--color-gold) border-(--color-gold)"
-                      : "bg-white border-black/10"
+                      : "bg-(--color-surface) border-black/10"
                   }`}
                 >
                   <div className="flex flex-col gap-3">
                     <h2
-                      className="text-2xl font-black"
+                      className="text-2xl text-(--color-text)"
                       style={{ fontFamily: "var(--font-headline)" }}
                     >
                       {plannedLandmark.title}
@@ -110,7 +110,7 @@ export default function PlanPage() {
                     <div className="flex flex-wrap justify-center gap-3 pt-2">
                       <Link
                         href={`/route/${plannedLandmark.slug}`}
-                        className="rounded-full border border-(--color-yellow) bg-white px-4 py-2 text-sm font-bold text-black"
+                        className="rounded-full border border-(--color-yellow) bg-(--color-surface) px-4 py-2 text-sm font-bold text-(--color-text)"
                       >
                         View
                       </Link>

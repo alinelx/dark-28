@@ -2,6 +2,13 @@ import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import SectionCard from "@/components/SectionCard";
 import PageContainer from "@/components/PageContainer";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Understanding the Route",
+  description:
+    "Learn how Dark28 reimagines Lisbon’s Tram 28 through dark heritage, historical context, and ethical storytelling.",
+};
 
 export default function AboutPage() {
   return (
@@ -10,41 +17,38 @@ export default function AboutPage() {
       <PageContainer>
         <div className="flex flex-col w-full items-center gap-8 pt-10 text-center">
           <h1 className="text-4xl font-bold" style={{ fontFamily: "var(--font-headline)" }}>
-            Why Dark28?
+            Understanding the route
           </h1>
           <p
           className="mt-6 max-w-md text-2xl leading-snug text-(--color-gold)"
           style={{ fontFamily: "var(--font-accent)" }}
           >
-            Dark28 offers a unique perspective on Lisbon’s cultural landscape by highlighting stories that are often marginalized or forgotten.
+            Dark28 reimagines Lisbon’s Tram 28 as a self-guided experience focused on overlooked history, ethical storytelling, and cultural reflection.
           </p>
         <div className="mt-10 flex items-center flex-col gap-6">
-        <SectionCard title="What is Dark28?">
+        <SectionCard title="Why this project exists?">
           <p>
-            Dark28 is a digital cultural heritage project that reimagines Lisbon’s
-            iconic Tram 28 as a route through the city’s darker and often overlooked
-            histories.
-            <br />
-            <br />
-            Instead of focusing only on postcard landmarks, it invites visitors to
-            explore places connected to death, dictatorship, religion, colonialism,
-            disaster, punishment, and collective memory.
+          Lisbon is often presented through postcard imagery, yet many places along Tram 28 are tied to dictatorship, colonialism, death, persecution, and collective memory. Dark28 was designed to make those histories more visible without turning them into spectacle.
+          </p>
+        </SectionCard>
+        <SectionCard title="Why Tram 28">
+          <p>
+          Tram 28 already offers a familiar route through Lisbon, which makes it a powerful narrative structure. Instead of inventing an entirely new path, Dark28 reinterprets an existing one through a darker cultural lens.
+          </p>
+        </SectionCard>
+        <SectionCard title="How the experience works">
+          <p>
+          Users can browse landmarks by historical theme, open detail pages with contextual storytelling, save stops into a personal plan, mark places as visited, and follow the route in either direction.
           </p>
         </SectionCard>
         <SectionCard title="Ethical approach">
           <p>
-            Dark28 is not designed to sensationalize suffering. Its goal is to  present difficult histories with context, sensitivity, and respect.
-            <br />
-            <br />
-            The project encourages critical reflection, cultural awareness, and responsible tourism by framing each site as part of Lisbon’s wider historical, political, and social reality.
+          Dark28 does not sensationalize suffering. The project prioritizes context, memory, and respect, framing each place as part of Lisbon’s wider historical and social reality.
           </p>
         </SectionCard>
-        <SectionCard title="Project origin">
+        <SectionCard title="From research to product">
           <p>
-            Dark28 began as an academic project in Cultural Tourism and Heritage at EHTL and is now being rebuilt as a digital product and front-end app/web portfolio piece.
-            <br />
-            <br />
-            It combines historical storytelling, editorial design, tourism research, and modern web development into a product that is both educational and scalable.
+          The project began as an academic concept in cultural tourism and heritage and was later rebuilt as a front-end portfolio piece. This version focuses on interface design, information architecture, content modelling, and product thinking.
           </p>
         </SectionCard>
       </div>
@@ -53,7 +57,7 @@ export default function AboutPage() {
           href="/route"
           className="inline-block rounded-full bg-(--color-burgundy) px-5 py-3 text-lg font-bold text-(--color-bg) transition hover:opacity-90"
         >
-          Explore Route
+          Explore the landmarks
         </Link>
       </div>
       </div>

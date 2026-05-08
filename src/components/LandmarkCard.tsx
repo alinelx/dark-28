@@ -18,10 +18,10 @@ export default function LandmarkCard({ landmark, activeCategory }: LandmarkCardP
   const visited = isVisited(landmark.id);
   const planned = isPlanned(landmark.id);
   return (
-    <div className={`rounded-lg w-full border border-black/10 shadow-sm ${visited ? 'bg-(--color-gold)' : planned ? 'bg-white border-2 border-(--color-burgundy)' : 'bg-(--color-bg)'}`}>
+    <div className={`rounded-lg w-full border border-black/10 shadow-sm ${visited ? 'bg-(--color-gold)' : planned ? 'bg-(--color-surface) border-2 border-(--color-burgundy)' : 'bg-(--color-bg)'}`}>
       <div className="p-4">
         <section className={`flex w-full items-center `}>
-          <div className="flex aspect-square w-1/4 max-w-12 items-center justify-center rounded-full bg-(--color-yellow) text-lg font-extrabold text-black">
+          <div className="flex aspect-square w-1/4 max-w-12 items-center justify-center rounded-full bg-(--color-yellow) text-lg font-extrabold text-(--color-text)">
             {landmark.id}
           </div>
 
@@ -47,7 +47,7 @@ export default function LandmarkCard({ landmark, activeCategory }: LandmarkCardP
             </div>
           </div>
         </section>
-        <p className={`pt-4 text-sm font-bold ${visited ? 'text-black' : 'text-(--color-yellow)'}`}>
+        <p className={`pt-4 text-sm font-bold ${visited ? 'text-(--color-text)' : 'text-(--color-yellow)'}`}>
           {landmark.locationName} • {landmark.type}
         </p>
 
@@ -67,7 +67,7 @@ export default function LandmarkCard({ landmark, activeCategory }: LandmarkCardP
                 ? `/route/${landmark.slug}?category=${activeCategory}`
                 : `/route/${landmark.slug}`
             }
-            className="rounded-full border border-(--color-yellow) bg-white px-3 py-2 text-sm font-bold text-black"
+            className="rounded-full border border-(--color-yellow) bg-(--color-surface) px-3 py-2 text-sm font-bold text-(--color-text)"
           >
             View
           </Link>
