@@ -18,7 +18,7 @@ export default function LandmarkCard({ landmark, activeCategory }: LandmarkCardP
   const visited = isVisited(landmark.id);
   const planned = isPlanned(landmark.id);
   return (
-    <div className={`rounded-lg max-w-100 border border-black/10 shadow-sm ${visited ? 'bg-(--color-gold)' : planned ? 'bg-white border-2 border-(--color-burgundy)' : 'bg-(--color-bg)'}`}>
+    <div className={`rounded-lg w-full border border-black/10 shadow-sm ${visited ? 'bg-(--color-gold)' : planned ? 'bg-white border-2 border-(--color-burgundy)' : 'bg-(--color-bg)'}`}>
       <div className="p-4">
         <section className={`flex w-full items-center `}>
           <div className="flex aspect-square w-1/4 max-w-12 items-center justify-center rounded-full bg-(--color-yellow) text-lg font-extrabold text-black">

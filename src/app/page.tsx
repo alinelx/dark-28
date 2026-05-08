@@ -101,7 +101,7 @@ export default function Home() {
             <Link
               key={landmark.id}
               href={`/route/${landmark.slug}`}
-              className="flex flex-col gap-4 w-full max-w-xs min-h-auto rounded-lg border border-black/10 bg-white p-4 shadow-sm transition hover:bg-(--color-yellow)"
+              className="flex flex-col gap-4 w-full max-w-xs rounded-lg border border-black/10 bg-white p-4 shadow-sm transition hover:bg-(--color-yellow)"
             >
               <Image
                 src={landmark.imageUrl!}
