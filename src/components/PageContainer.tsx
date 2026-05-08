@@ -1,13 +1,9 @@
-import react from 'react';
+import { ReactNode } from "react";
 
 type PageContainerProps = {
-    children: React.ReactNode;
+  children: ReactNode;
 };
 
 export default function PageContainer({ children }: PageContainerProps) {
-    return (
-        <main className="mx-auto max-w-3xl px-6 py-10">
-            {children}
-        </main>
-    );
+  return <div className="mx-auto max-w-3xl px-6 py-7">{children}</div>;
 }

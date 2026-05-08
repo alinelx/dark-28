@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { landmarks } from "@/data/landmarks";
 import { categories } from "@/data/categories";
@@ -6,7 +5,7 @@ import PageHeader from "@/components/PageHeader";
 import LandmarkDetail from "@/components/LandmarkDetail";
 import NextStop from "@/components/NextStop";
 
-type NextStopProps = {
+type LandmarkDetailPageProps = {
   params: Promise<{
     slug: string;
   }>;
@@ -15,10 +14,10 @@ type NextStopProps = {
   }>;
 };
 
-export default async function nextStop({
+export default async function LandmarkDetailPage({
     params,
     searchParams,
-}: NextStopProps) {
+}: LandmarkDetailPageProps) {
     const { slug } = await params;
     const { category } = await searchParams;
     const backHref =

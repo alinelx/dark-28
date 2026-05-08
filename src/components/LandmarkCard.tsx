@@ -7,7 +7,6 @@ import CategoryBadge from "@/components/CategoryBadge";
 import PlanButton from "@/components/PlanButton";
 import { usePlan } from "@/hooks/usePlan";
 import VisitedButton from "@/components/VisitedButton";
-import PageContainer from "@/components/PageContainer";
 
 type LandmarkCardProps = {
   landmark: Landmark;
@@ -15,13 +14,12 @@ type LandmarkCardProps = {
 };
 
 export default function LandmarkCard({ landmark, activeCategory }: LandmarkCardProps) {
-  const { isVisited } = usePlan();
+  const { isVisited, isPlanned } = usePlan();
   const visited = isVisited(landmark.id);
-  const { isPlanned } = usePlan();
   const planned = isPlanned(landmark.id);
   return (
-    <div className={`rounded-lg max-w-100 shadow-sm ${visited ? 'bg-(--color-gold)' : planned ? 'bg-white border-2 border-(--color-burgundy)' : 'bg-white opacity-60'}`}>
-      <PageContainer>
+    <div className={`rounded-lg max-w-100 border border-black/10 shadow-sm ${visited ? 'bg-(--color-gold)' : planned ? 'bg-white border-2 border-(--color-burgundy)' : 'bg-(--color-bg)'}`}>
+      <div className="p-4">
         <section className={`flex w-full items-center `}>
           <div className="flex aspect-square w-1/4 max-w-12 items-center justify-center rounded-full bg-(--color-yellow) text-lg font-extrabold text-black">
             {landmark.id}
@@ -53,31 +51,31 @@ export default function LandmarkCard({ landmark, activeCategory }: LandmarkCardP
           {landmark.locationName} • {landmark.type}
         </p>
 
-      <p className="text-sm font-semibold">
-        {landmark.price}
-        {landmark.estimatedVisitTime ? (
-          <> | {landmark.estimatedVisitTime}</>
-        ) : null}
-      </p>
+        <p className="text-sm font-semibold">
+          {landmark.price}
+          {landmark.estimatedVisitTime ? (
+            <> | {landmark.estimatedVisitTime}</>
+          ) : null}
+        </p>
 
-      <p className="mt-2 text-sm">{landmark.summary}</p>
+        <p className="mt-2 text-sm">{landmark.summary}</p>
 
-      <div className="mt-4 flex justify-center gap-2">
-        <Link
-          href={
-            activeCategory && activeCategory !== "all"
-              ? `/route/${landmark.slug}?category=${activeCategory}`
-              : `/route/${landmark.slug}`
-          }
-          className="rounded-full border border-(--color-yellow) bg-white px-3 py-2 text-sm font-bold text-black"
-        >
-          View
-        </Link>
+        <div className="mt-4 flex justify-center gap-2">
+          <Link
+            href={
+              activeCategory && activeCategory !== "all"
+                ? `/route/${landmark.slug}?category=${activeCategory}`
+                : `/route/${landmark.slug}`
+            }
+            className="rounded-full border border-(--color-yellow) bg-white px-3 py-2 text-sm font-bold text-black"
+          >
+            View
+          </Link>
 
-        <PlanButton landmarkId={landmark.id} />
-        <VisitedButton landmarkId={landmark.id} />
+          <PlanButton landmarkId={landmark.id} />
+          <VisitedButton landmarkId={landmark.id} />
+        </div>
       </div>
-      </PageContainer>
     </div>
   );
 }

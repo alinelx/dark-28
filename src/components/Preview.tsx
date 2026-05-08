@@ -26,7 +26,7 @@ export default function HistoricalContextPreview({
         </p>
 
         {!isExpanded && shouldTruncate && (
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 mt-20 h-28 rounded-b-2xl bg-linear-to-t from-white via-white/85 to-transparent backdrop-blur-sm" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 mt-20 h-28 w-full rounded-b-2xl bg-linear-to-t from-white via-white/85 to-transparent backdrop-blur-sm" />
         )}
       </div>
 
@@ -37,7 +37,7 @@ export default function HistoricalContextPreview({
             onClick={() => setIsExpanded(true)}
             className="rounded-full bg-black px-4 py-2 text-sm font-bold text-white shadow-md"
           >
-            Click to unlock
+            Continue reading
           </button>
         </div>
       )}
