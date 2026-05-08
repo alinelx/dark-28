@@ -4,117 +4,46 @@
 
 ## Lisbon’s Dark Cultural Heritage Route
 
-Dark28 is a cultural tourism web application concept that transforms Lisbon’s iconic Tram 28 route into a self-guided digital experience focused on dark tourism, historical memory, and alternative cultural exploration.
-
-This project reimagines an academic tourism concept into a modern front-end portfolio piece, combining UX/UI design, interactive mapping, and educational storytelling.
-
----
+Dark28 is a front-end product concept that reimagines Lisbon’s iconic Tram 28 as a self-guided cultural route focused on dark heritage, historical memory, and ethical storytelling.
 
 ## Overview
 
-Dark28 offers travelers and history enthusiasts an immersive way to explore:
+Rather than highlighting only postcard landmarks, Dark28 invites users to explore places connected to dictatorship, religion, death, colonialism, urban disaster, and collective memory across Lisbon.
 
-- Political repression sites
-- Religious persecution landmarks
-- Urban disasters
-- Colonial history
-- Public tragedies
-- Forgotten narratives across Lisbon
+The project was rebuilt from an academic cultural tourism concept into a portfolio-ready digital product focused on UX/UI, front-end architecture, and content-driven design.
 
-Through an interactive route, users can independently navigate historically significant locations while accessing curated educational content.
+## Features
 
----
-
-## Core Features (MVP)
-
-- Interactive historical route map
-- Landmark detail pages
-- Thematic filters
-- Mobile-first responsive design
-- Personalized route planning
-- Multilingual support
-- Ethical historical storytelling
-
----
+- Editorial homepage with project context
+- Route browsing by historical theme
+- Landmark detail pages with contextual storytelling
+- Save landmarks to a personal plan
+- Mark landmarks as visited
+- Route direction support
+- Profile/progress experience
 
 ## Tech Stack
 
-### Front-End
-- React
 - Next.js
+- React
 - TypeScript
 - Tailwind CSS
 
-### Back-End / Data
-- Firebase
-- Google Sheets CMS (early stage)
-- Google Apps Script admin tools
-
-### APIs
-- Google Maps API
-- Geolocation services
-
----
-
 ## Project Goals
 
-- Build a unique portfolio centerpiece
-- Demonstrate front-end product development skills
-- Combine tourism, culture, and technology
-- Create scalable digital heritage solutions
-
----
-
-## Design Principles
-
-Dark28 prioritizes:
-
-- Historical sensitivity
-- Accessibility
-- User autonomy
-- Educational depth
-- Editorial-quality UX/UI
-
----
-
-## Future Enhancements
-
-- AI route recommendations
-- Audio guides
-- AR overlays
-- Premium subscription features
-- Community-generated routes
-
----
-
-## Why This Project Matters
-
-Dark28 showcases:
-
-- Product strategy
-- UX research
-- Front-end architecture
-- Content systems design
-- Branding
-- Real-world problem solving
-
----
+- Build a distinctive front-end portfolio project
+- Explore product thinking through cultural storytelling
+- Design a mobile-first experience for self-guided discovery
+- Demonstrate structured content modelling and reusable UI components
 
 ## Status
 
-### Current Phase:
-Portfolio MVP Planning & Development
-
----
+In active development as a portfolio case study.
 
 ## Author
 
-**Aline Lopes Xavier**
-
-Content Analyst transitioning into Front-End Development, Product Design, and Digital Solutions.
-
----
+Aline Lopes Xavier
 
 ## License
 
-MIT License
+MIT

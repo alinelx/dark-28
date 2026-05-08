@@ -59,7 +59,7 @@ export default function RoutePage() {
             Showing {filteredLandmarks.length} landmark
             {filteredLandmarks.length === 1 ? "" : "s"}
           </p>
-          <div className="sticky top-4 flex gap-3 overflow-x-auto md:flex-wrap md:overflow-visible">
+          <div className="flex gap-3 w-full overflow-x-auto p-2 md:flex-wrap md:overflow-visible">
             <button
               type="button"
               onClick={() => handleCategoryChange("all")}
