@@ -82,7 +82,7 @@ export default function ProfilePage() {
               {visitedLandmarks.map((landmark) => (
                 <div
                   key={landmark.id}
-                  className="rounded-xl border border-black/10 bg-(--color-surface) p-4"
+                  className="rounded-xl border border-(--color-text)/10 bg-(--color-surface) p-4"
                 >
                   <h3
                     className="text-xl font-black"
@@ -115,7 +115,7 @@ export default function ProfilePage() {
               {remainingLandmarks.map((landmark) => (
                 <div
                   key={landmark.id}
-                  className="rounded-xl border border-black/10 bg-(--color-surface) p-4"
+                  className="rounded-xl border border-(--color-text)/10 bg-(--color-surface) p-4"
                 >
                   <h3
                     className="text-xl font-black"

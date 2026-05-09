@@ -4,6 +4,8 @@
   --font-body: "Inter", sans-serif;
   --font-headline: "Playfair Display", serif;
   --font-accent: "Cormorant Garamond", serif;
+  --color-white: #f7f2e8;
+  --color-black: #121212;
 }
 
 html[data-theme="light"] {
@@ -18,7 +20,7 @@ html[data-theme="light"] {
 
 html[data-theme="dark"] {
   --color-bg: #121212;
-  --color-text: #f5efe3;
+  --color-text: #f7f2e8;
   --color-yellow: #d9a21b;
   --color-burgundy: #5c0612;
   --color-gold: #b88a44;

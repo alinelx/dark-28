@@ -53,8 +53,8 @@ export default function RoutePage() {
         >
           Discover the overlooked histories hidden across Lisbon.
         </h2>
-        <div className="flex flex-col border border-black/10 p-4 m-4 gap-2 items-center rounded-lg">
-          <h2 className="text-3xl font-semibold leading-none tracking-tight md:text-3xl" style={{ fontFamily: "var(--font-headline)" }}>Browse by theme</h2>
+        <div className="flex flex-col border border-(--color-text)/10 p-4 m-4 gap-2 items-center rounded-lg">
+          <h2 className="text-2xl font-semibold leading-none tracking-tight md:text-3xl" style={{ fontFamily: "var(--font-headline)" }}>Browse by theme</h2>
           <p className="text-center text-sm text-(--color-text)/60">
             Showing {filteredLandmarks.length} landmark
             {filteredLandmarks.length === 1 ? "" : "s"}
@@ -67,7 +67,7 @@ export default function RoutePage() {
               className={`rounded-full px-4 py-2 text-sm w-fit font-bold transition ${
                 activeCategory === "all"
                   ? "bg-(--color-text) text-(--color-bg)"
-                  : "bg-(--color-surface) text-(--color-text) border border-black/10"
+                  : "bg-(--color-surface) text-(--color-text) border border-(--color-text)/10"
               }`}
             >
               All
@@ -81,7 +81,7 @@ export default function RoutePage() {
                 className={`rounded-full px-4 py-2 text-sm w-fit text-nowrap font-bold transition ${
                   activeCategory === category.id
                   ? "bg-(--color-text) text-(--color-bg)"
-                  : "bg-(--color-surface) text-(--color-text) border border-black/10"
+                  : "bg-(--color-surface) text-(--color-text) border border-(--color-text)/10"
                 }`}
               >
                 {category.label}
@@ -90,7 +90,7 @@ export default function RoutePage() {
           </div>
         </div>
         {filteredLandmarks.length === 0 ? (
-          <div className="rounded-2xl gap-4 border border-black/10 bg-(--color-surface) p-6 text-center">
+          <div className="rounded-2xl gap-4 border border-(--color-text)/10 bg-(--color-surface) p-6 text-center">
             No landmarks found for this category yet.
           </div>
         ) : (

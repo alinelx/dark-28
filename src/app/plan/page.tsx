@@ -70,7 +70,7 @@ export default function PlanPage() {
                   className={`w-full rounded-2xl border p-5 text-sm transition ${
                     visited
                       ? "bg-(--color-gold) border-(--color-gold)"
-                      : "bg-(--color-surface) border-black/10"
+                      : "bg-(--color-surface) border-(--color-text)/10"
                   }`}
                 >
                   <div className="flex flex-col gap-3">

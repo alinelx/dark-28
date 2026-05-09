@@ -6,9 +6,10 @@ import Link from "next/link";
 import Image from "next/image";
 import SectionCard from "@/components/SectionCard";
 import type { Metadata } from "next";
+import Pill, { HandlePillProps } from "@/components/Pills";
 
 export const metadata: Metadata = {
-  title: "Lisbon’s Dark Cultural Heritage Route",
+  title: "Dark28: Lisbon’s Dark Cultural Heritage Route",
   description:
     "Explore overlooked stories of tragedy, resistance, faith, and memory along Lisbon’s iconic Tram 28 with Dark28.",
 };
@@ -35,17 +36,21 @@ export default function Home() {
             
           </div>
           <div className="mt-8 flex w-full flex-col items-center gap-3">
-            <Link
-              href="/route"
-              className="rounded-lg bg-(--color-text) px-5 py-3 text-lg font-medium text-(--color-bg) transition hover:opacity-90"
-            >
-              Explore Route
-            </Link>
-            <Link
-              href="/about"
-              className="rounded-lg pt-0 py-3 text-sm font-medium text-(--color-text)/70 transition hover:opacity-90"
-            >
-              See how Dark28 works
+            <Pill href="/route" label="Explore Route" style="primary" />
+            <Link  href="/about">
+            <p className = {HandlePillProps({
+        size: "xs font-black",
+        bgColor: "(--color-bg)",
+        textColor: "(--color-text)",
+        bgColorHover: "(--color-text)",
+        textColorHover: "(--color-black)",
+        border: "ring-1",
+        px: 6,
+        py: 3,
+        gap: "mb-3"
+    })}>
+            See how Dark28 work
+            </p>
             </Link>
           </div>
           <SectionCard title="Why it matters">
@@ -53,21 +58,21 @@ export default function Home() {
           </SectionCard>
           <SectionCard title="How it works">
             <div className="grid gap-4 md:grid-cols-3">
-              <div className="rounded-2xl border border-black/10 bg-(--color-bg) p-6 shadow-sm transition hover:bg-(--color-yellow)">
+              <div className="rounded-2xl border border-(--color-text)/10 bg-(--color-bg) p-6 shadow-sm transition hover:bg-(--color-yellow) hover:text-black">
                 <h4 className="text-md font-semibold leading-none pb-5 tracking-tight md:text-md" style={{ fontFamily: "var(--font-headline)" }}>Step 1</h4>
                 <div className="flex-wrap w-full">
                   <h3 className="text-xl font-semibold leading-none pb-5 tracking-tight md:text-xl" style={{ fontFamily: "var(--font-headline)" }}>Follow the route</h3>
                   Start with Lisbon’s most iconic tram line and use it as a cultural thread through the city.
                 </div>
               </div>
-              <div className="rounded-2xl border border-black/10 bg-(--color-bg) p-6 shadow-sm transition hover:bg-(--color-yellow)">
+              <div className="rounded-2xl border border-(--color-text)/10 bg-(--color-bg) p-6 shadow-sm transition hover:bg-(--color-yellow) hover:text-black">
                 <h4 className="text-md font-semibold leading-none pb-5 tracking-tight md:text-md" style={{ fontFamily: "var(--font-headline)" }}>Step 2</h4>
                 <div className="flex-wrap w-full">
                 <h3 className="text-xl font-semibold leading-none pb-5 tracking-tight md:text-xl" style={{ fontFamily: "var(--font-headline)" }}>Discover overlooked histories</h3>
                 Browse landmarks connected to repression, memory, disaster, faith, colonialism, and political struggle.
                 </div>
               </div>
-              <div className="rounded-2xl border border-black/10 bg-(--color-bg) p-6 shadow-sm transition hover:bg-(--color-yellow)">
+              <div className="rounded-2xl border border-(--color-text)/10 bg-(--color-bg) p-6 shadow-sm transition hover:bg-(--color-yellow) hover:text-black">
                 <h4 className="text-md font-semibold leading-none pb-5 tracking-tight md:text-md" style={{ fontFamily: "var(--font-headline)" }}>Step 3</h4>
                 <div className="flex-wrap w-full">
                 <h3 className="text-xl font-semibold leading-none pb-5 tracking-tight md:text-xl" style={{ fontFamily: "var(--font-headline)" }}>Build your own path</h3>
@@ -76,13 +81,16 @@ export default function Home() {
               </div>          
             </div>
           </SectionCard>
+          <div className="mt-8 flex w-full flex-col items-center gap-3">
+          <Pill href="/plan" label="Explore your plan"  style="secondary" />
+          </div>
           <SectionCard title="Our categories">
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {categories.slice(0, 6).map((category) => (
                 <Link
                   key={category.id}
                   href={`/route?category=${category.id}`}
-                  className="rounded-2xl border border-black/10 bg-(--color-bg) p-6 shadow-sm transition hover:bg-(--color-yellow)"
+                  className="rounded-2xl border border-(--color-text)/10 bg-(--color-bg) p-6 shadow-sm transition hover:bg-(--color-yellow) hover:text-black"
                 >
                   <div className="w-full">
                     <h3 className="text-xl font-semibold leading-none pb-5 tracking-tight md:text-xl" style={{ fontFamily: "var(--font-headline)" }}>{category.label}</h3>
@@ -91,13 +99,10 @@ export default function Home() {
                 </Link>
               ))}
             </div>
-            <Link
-              href="/route"
-              className="flex flex-row rounded-lg bg-(--color-yellow) px-4 py-3 mx-auto mt-5 w-fit text-lg font-medium text-black transition hover:opacity-90"
-            >
-              Explore all categories
-            </Link>
           </SectionCard>
+          <div className="mt-8 flex w-full flex-col items-center gap-3">
+          <Pill href="/route" label="Explore all categories"  style="secondary" />
+          </div>
           <section className="mt-10">
             <h3 className="text-xl font-semibold leading-none pb-5 text-center tracking-tight md:text-xl" style={{ fontFamily: "var(--font-headline)" }}>
               Three landmarks that reveal the route
@@ -105,12 +110,12 @@ export default function Home() {
             <p className="mx-auto max-w-2xl text-center text-sm text-(--color-text)/70">
               These first stops show the range of stories behind Dark28, from funerary heritage and monarchy to colonial memory and political repression.
             </p>
-            <div className="grid grid-cols-3 gap-4 center">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 center">
               {landmarks.slice(0, 3).map((landmark) => (
                 <Link
                   key={landmark.id}
                   href={`/route/${landmark.slug}`}
-                  className="flex flex-col gap-4 w-full items-center mx-auto my-4 max-w-sm rounded-lg border border-black/10 bg-(--color-surface) p-4 shadow-sm transition hover:bg-(--color-yellow)"
+                  className="flex flex-col gap-4 w-full items-center mx-auto my-4 max-w-sm rounded-lg border border-(--color-text)/10 bg-(--color-surface) p-4 shadow-sm transition hover:bg-(--color-yellow) hover:text-black"
                 >
                   <Image
                     src={landmark.imageUrl!}
@@ -139,13 +144,12 @@ export default function Home() {
               Start with the landmarks and follow a route shaped by memory, conflict, belief, and historical change.
             </p>
           </div>
-          <div className="mt-8 flex w-full flex-col items-center gap-3">
-            <Link
+          <div className="mt-8 flex w-full flex-col mb-10 items-center gap-3">
+            <Pill
               href="/route"
-              className="rounded-lg bg-(--color-text) px-5 py-3 text-lg font-medium text-(--color-bg) transition hover:opacity-90"
-            >
-              Explore the landmarks
-            </Link>
+              label="Explore the landmarks"
+              style="primary"
+            />
           </div>
         </div>
       </PageContainer>

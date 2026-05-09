@@ -6,41 +6,49 @@ export type ThemeMode = "light" | "dark" | "system";
 
 const STORAGE_KEY = "dark28-theme";
 
+function getStoredTheme(): ThemeMode {
+  if (typeof window === "undefined") {
+    return "system";
+  }
+
+  const saved = window.localStorage.getItem(STORAGE_KEY);
+
+  return saved === "light" || saved === "dark" || saved === "system"
+    ? saved
+    : "system";
+}
+
 function getSystemTheme(): "light" | "dark" {
-  if (typeof window === "undefined") return "light";
+  if (typeof window === "undefined") {
+    return "light";
+  }
 
   return window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
     : "light";
 }
 
-function resolveTheme(mode: ThemeMode): "light" | "dark" {
-  return mode === "system" ? getSystemTheme() : mode;
+function resolveTheme(theme: ThemeMode): "light" | "dark" {
+  return theme === "system" ? getSystemTheme() : theme;
 }
 
-function applyTheme(mode: ThemeMode) {
-  const resolved = resolveTheme(mode);
-  document.documentElement.setAttribute("data-theme", resolved);
+function applyTheme(theme: ThemeMode) {
+  const resolvedTheme = resolveTheme(theme);
+  document.documentElement.setAttribute("data-theme", resolvedTheme);
 }
 
 export function useTheme() {
-  const [theme, setThemeState] = useState<ThemeMode>("system");
+  const [theme, setThemeState] = useState<ThemeMode>(getStoredTheme);
 
   useEffect(() => {
-    const saved = window.localStorage.getItem(STORAGE_KEY);
-    const initialTheme: ThemeMode =
-      saved === "light" || saved === "dark" || saved === "system"
-        ? saved
-        : "system";
-
-    setThemeState(initialTheme);
-    applyTheme(initialTheme);
+    applyTheme(theme);
 
     const media = window.matchMedia("(prefers-color-scheme: dark)");
 
     function handleSystemChange() {
-      const currentSaved = window.localStorage.getItem(STORAGE_KEY);
-      if (!currentSaved || currentSaved === "system") {
+      const saved = getStoredTheme();
+
+      if (saved === "system") {
         applyTheme("system");
       }
     }
@@ -50,12 +58,11 @@ export function useTheme() {
     return () => {
       media.removeEventListener("change", handleSystemChange);
     };
-  }, []);
+  }, [theme]);
 
   function setTheme(nextTheme: ThemeMode) {
     setThemeState(nextTheme);
     window.localStorage.setItem(STORAGE_KEY, nextTheme);
-    applyTheme(nextTheme);
   }
 
   return { theme, setTheme };

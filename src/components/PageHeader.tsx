@@ -10,13 +10,14 @@ type PageHeaderProps = {
 };
 
 function Logo() {
+  const desktopLogoEffect= "transition-transform duration-200 ease-in-out hover:scale-110 hover:rotate-360"
   return (
     <Link href="/" aria-label="Go to homepage" className="block w-20">
       <Image
         src="/logo.png"
         width={160}
         height={160}
-        className="h-auto w-full transition-transform duration-200 ease-in-out hover:scale-110"
+        className={`h-auto w-full ${desktopLogoEffect}`}
         alt="Dark28 Logo"
         priority
       />
@@ -26,37 +27,28 @@ function Logo() {
 
 export default function PageHeader({ backHref }: PageHeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const primaryButtonClass =
-    "rounded-full bg-black px-4 py-3 text-sm font-bold text-white transition-transform duration-200 ease-in-out hover:scale-105";
-
+    "rounded-full bg-black px-4 py-3 text-sm font-bold text-white --transform-button";
   const secondaryButtonClass =
-    "rounded-full bg-(--color-yellow) px-4 py-3 text-sm font-bold text-black transition-transform duration-200 ease-in-out hover:scale-105";
-
+    "rounded-full bg-(--color-yellow) px-4 py-3 text-sm font-bold text-black --transform-button";
   const roundButtonClass =
-    "flex h-12 w-12 items-center justify-center rounded-full bg-black text-lg font-extrabold text-white transition-transform duration-200 ease-in-out hover:scale-110";
-
+    "flex h-12 w-12 items-center justify-center rounded-full bg-black text-lg font-extrabold text-white transform-(--transform-button)";
   function openMenu() {
     setIsMenuOpen(true);
   }
-
   function closeMenu() {
     setIsMenuOpen(false);
   }
-
   useEffect(() => {
     if (!isMenuOpen) return;
-
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         closeMenu();
       }
     }
-
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isMenuOpen]);
-
   return (
     <>
       <header className="bg-(--color-yellow) px-6 pb-6 pt-10">
@@ -90,7 +82,7 @@ export default function PageHeader({ backHref }: PageHeaderProps) {
         type="button"
         aria-label="Close menu overlay"
         onClick={closeMenu}
-        className={`fixed inset-0 z-40 bg-(--color-text)/40 transition-opacity duration-300 ${
+        className={`fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 ${
           isMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
       />
@@ -102,14 +94,14 @@ export default function PageHeader({ backHref }: PageHeaderProps) {
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-between">
+        <div className="flex flex-row items-center justify-evenly">
           <div
             className="text-2xl font-bold text-(--color-text)"
             style={{ fontFamily: "var(--font-headline)" }}
           >
             Dark28
           </div>
-
+          <ThemeToggle />
           <button
             type="button"
             aria-label="Close menu"
@@ -141,11 +133,6 @@ export default function PageHeader({ backHref }: PageHeaderProps) {
             Explore Route
           </Link>
         </nav>
-
-        <div className="flex flex-col gap-3">
-          <p className="text-sm font-semibold text-(--color-text)/60">Theme</p>
-          <ThemeToggle />
-        </div>
       </aside>
     </>
   );

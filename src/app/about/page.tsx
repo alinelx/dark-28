@@ -5,7 +5,7 @@ import PageContainer from "@/components/PageContainer";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Understanding the Route",
+  title: "Dark28: Understanding the Route",
   description:
     "Learn how Dark28 reimagines Lisbon’s Tram 28 through dark heritage, historical context, and ethical storytelling.",
 };
@@ -55,7 +55,7 @@ export default function AboutPage() {
       <div className="pt-2 items-center justify-center text-center">
         <Link
           href="/route"
-          className="inline-block rounded-full bg-(--color-burgundy) px-5 py-3 text-lg font-bold text-white transition hover:opacity-90"
+          className="inline-block rounded-full bg-(--color-burgundy) px-5 py-3 mb-10 text-lg font-bold text-white transition hover:opacity-90"
         >
           Explore the landmarks
         </Link>
