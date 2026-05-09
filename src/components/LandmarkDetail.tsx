@@ -99,7 +99,7 @@ export default function LandmarkDetail({ landmark }: LandmarkDetailProps) {
         <SectionCard title="Historical Context">
             <HistoricalContextPreview
                 text={landmark.historicalContext}
-                previewLength={320}
+                previewLength={150}
             />
         </SectionCard>
         {landmark.ethicalNote && (

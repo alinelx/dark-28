@@ -55,7 +55,7 @@ export default function AboutPage() {
       <div className="pt-2 items-center justify-center text-center">
         <Link
           href="/route"
-          className="inline-block rounded-full bg-(--color-burgundy) px-5 py-3 text-lg font-bold text-(--color-bg) transition hover:opacity-90"
+          className="inline-block rounded-full bg-(--color-burgundy) px-5 py-3 text-lg font-bold text-white transition hover:opacity-90"
         >
           Explore the landmarks
         </Link>

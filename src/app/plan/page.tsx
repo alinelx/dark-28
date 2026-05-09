@@ -95,7 +95,7 @@ export default function PlanPage() {
                       })}
                     </div>
 
-                    <p className="text-sm font-bold text-(--color-burgundy)">
+                    <p className="text-sm font-bold text-(--color-text)">
                       {plannedLandmark.locationName} • {plannedLandmark.type}
                     </p>
 

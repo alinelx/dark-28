@@ -17,7 +17,7 @@ export default function VisitedButton({ landmarkId }: VisitedButtonProps) {
       onClick={() => toggleVisited(landmarkId)}
       className={`rounded-full px-3 py-2 text-sm font-bold ${
         visited
-          ? "bg-(--color-burgundy) text-(--color-bg)"
+          ? "bg-(--color-burgundy) text-white"
           : "bg-(--color-surface) border border-(--color-burgundy) text-(--color-text)"
       }`}
     >

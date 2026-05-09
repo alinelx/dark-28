@@ -9,7 +9,7 @@ type HistoricalContextPreviewProps = {
 
 export default function HistoricalContextPreview({
   text,
-  previewLength = 320,
+  previewLength = 150,
 }: HistoricalContextPreviewProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -26,12 +26,12 @@ export default function HistoricalContextPreview({
         </p>
 
         {!isExpanded && shouldTruncate && (
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 mt-20 h-28 w-full rounded-b-2xl bg-linear-to-t from-white via-white/85 to-transparent backdrop-blur-sm" />
+          <div className="" />
         )}
       </div>
 
       {!isExpanded && shouldTruncate && (
-        <div className="absolute z-10 left-1/2 transform -translate-x-1/2 -translate-y-20 flex justify-center">
+        <div className="relative flex m-3 justify-center">
           <button
             type="button"
             onClick={() => setIsExpanded(true)}

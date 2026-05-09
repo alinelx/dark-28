@@ -5,5 +5,5 @@ type PageContainerProps = {
 };
 
 export default function PageContainer({ children }: PageContainerProps) {
-  return <div className="mx-auto max-w-3xl px-6 py-7">{children}</div>;
+  return <div className="mx-auto max-w-5xl px-6 py-6 md:px-8">{children}</div>;
 }

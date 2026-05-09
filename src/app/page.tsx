@@ -19,7 +19,7 @@ export default function Home() {
       <PageHeader backHref="" />
       <PageContainer>
         <div className="gap-4">
-          <div className="flex flex-col w-full items-center gap-4 pt-10 text-center">
+          <div className="flex w-full flex-col items-center gap-4 pt-6 text-center md:pt-8">
             <h1
               className="max-w-md text-5xl font-semibold leading-none tracking-tight md:text-6xl"
               style={{ fontFamily: "var(--font-headline)" }}
@@ -34,7 +34,7 @@ export default function Home() {
             </p>
             
           </div>
-          <div className="mt-10 flex w-full items-center flex-col gap-3">
+          <div className="mt-8 flex w-full flex-col items-center gap-3">
             <Link
               href="/route"
               className="rounded-lg bg-(--color-text) px-5 py-3 text-lg font-medium text-(--color-bg) transition hover:opacity-90"
@@ -43,7 +43,7 @@ export default function Home() {
             </Link>
             <Link
               href="/about"
-              className="rounded-lg pt-0 py-3 text-sm font-medium text-(--color-burgundy) transition hover:opacity-90"
+              className="rounded-lg pt-0 py-3 text-sm font-medium text-(--color-text)/70 transition hover:opacity-90"
             >
               See how Dark28 works
             </Link>
@@ -99,28 +99,30 @@ export default function Home() {
             </Link>
           </SectionCard>
           <section className="mt-10">
-            <h3 className="text-sm text-center uppercase tracking-wide p-2 text-(--color-text)">
-              Five landmarks that reveal the route
+            <h3 className="text-xl font-semibold leading-none pb-5 text-center tracking-tight md:text-xl" style={{ fontFamily: "var(--font-headline)" }}>
+              Three landmarks that reveal the route
             </h3>
             <p className="mx-auto max-w-2xl text-center text-sm text-(--color-text)/70">
               These first stops show the range of stories behind Dark28, from funerary heritage and monarchy to colonial memory and political repression.
             </p>
-            <div className="flex flex-row overflow-auto gap-4 object-center p-4">
-              {landmarks.slice(0, 5).map((landmark) => (
+            <div className="grid grid-cols-3 gap-4 center">
+              {landmarks.slice(0, 3).map((landmark) => (
                 <Link
                   key={landmark.id}
                   href={`/route/${landmark.slug}`}
-                  className="flex flex-col gap-4 w-full max-w-xs rounded-lg border border-black/10 bg-(--color-surface) p-4 shadow-sm transition hover:bg-(--color-yellow)"
+                  className="flex flex-col gap-4 w-full items-center mx-auto my-4 max-w-sm rounded-lg border border-black/10 bg-(--color-surface) p-4 shadow-sm transition hover:bg-(--color-yellow)"
                 >
                   <Image
                     src={landmark.imageUrl!}
                     alt={landmark.title}
                     width={700}
                     height={700}
-                    className="w-56 aspect-square rounded object-cover"
+                    className="w-full aspect-square items-center rounded object-cover"
                   />
-                  <h3 className="text-xs font-medium text-center">{landmark.title}</h3>
-                  View landmark
+                  <h3 className="text-xl font-medium text-center" style={{ fontFamily: "var(--font-headline)" }}>{landmark.title}</h3>
+                  <span className="text-center text-xs font-semibold text-(--color-text)/50">
+                    View landmark
+                  </span>
                 </Link>
               ))}
             </div>     
@@ -128,7 +130,7 @@ export default function Home() {
           <SectionCard title="An Ethical Approach to Dark Heritage">
             <p>Dark28 treats difficult history with care. Rather than dramatizing violence or loss, the project emphasizes context, remembrance, and responsible interpretation, encouraging users to engage with Lisbon’s past in a more reflective way.</p>
           </SectionCard>
-          <div className="flex flex-col w-full items-center gap-4 pt-10 text-center">
+          <div className="flex w-full flex-col items-center gap-4 pt-8 text-center">
             <h2 className="text-3xl font-semibold leading-none tracking-tight md:text-3xl" style={{ fontFamily: "var(--font-headline)" }}>Ready to explore Lisbon differently?</h2>
             <p
               className="mt-6 max-w-md text-2xl leading-snug text-(--color-gold)"
@@ -137,7 +139,7 @@ export default function Home() {
               Start with the landmarks and follow a route shaped by memory, conflict, belief, and historical change.
             </p>
           </div>
-          <div className="mt-10 flex w-full items-center flex-col gap-3">
+          <div className="mt-8 flex w-full flex-col items-center gap-3">
             <Link
               href="/route"
               className="rounded-lg bg-(--color-text) px-5 py-3 text-lg font-medium text-(--color-bg) transition hover:opacity-90"

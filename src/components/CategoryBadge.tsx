@@ -10,7 +10,7 @@ export default function CategoryBadge({
   href,
 }: CategoryBadgeProps) {
   const className =
-    "rounded-full bg-(--color-burgundy) px-4 py-1 text-xs font-semibold text-(--color-surface) transition hover:opacity-90";
+    "rounded-full bg-(--color-burgundy) px-4 py-1 text-xs font-semibold text-white transition hover:opacity-90";
 
   if (href) {
     return (
