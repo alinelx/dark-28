@@ -13,7 +13,7 @@ export default function VisitedButton({ landmarkId }: VisitedButtonProps) {
   return (
     <Button 
       onClick={() => toggleVisited(landmarkId)}
-      style="default">
+      style="status">
         { visited ? "Visited" : "Check"}
     </Button>
   );
