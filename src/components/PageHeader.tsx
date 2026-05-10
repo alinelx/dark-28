@@ -104,15 +104,13 @@ export default function PageHeader({ backHref }: PageHeaderProps) {
           </Button>
         </div>
 
-        <nav className="flex flex-col gap-3">
-          <div onClick={closeMenu} className="flex flex-col w-fit gap-3 ">
-            <Pill href="/" style="secondary" label="Home" />
-            <Pill href="/about" style="secondary" label="About" />
-            <Pill href="/plan" style="secondary" label="My Plan" />
-            <Pill href="/profile" style="secondary" label="My progress" />
-            <Pill href="/route" style="primary" label="Explore route" />
-            <div className="text-xs text-center place-items-end">Dark28: Unveiling Lisbon’s hidden stories. Crafted by <Link href="https://github.com/alinelx/dark-28" className="font-black underline">alinelx</Link>.</div>
-          </div>
+        <nav className="flex flex-col w-fit gap-7">
+          <Link onClick={closeMenu} href="/"><Pill style="secondary" label="Home" /></Link>
+          <Link onClick={closeMenu} href="/about"><Pill style="secondary" label="About" /></Link>
+          <Link onClick={closeMenu} href="/plan"><Pill style="secondary" label="My Plan" /></Link>
+          <Link onClick={closeMenu} href="/profile"><Pill style="secondary" label="My progress" /></Link>
+          <Link onClick={closeMenu} href="/route"><Pill style="primary" label="Explore route" /></Link>
+          <div className="text-xs text-center place-items-end">Dark28: Unveiling Lisbon’s hidden stories. Crafted by <Link href="https://github.com/alinelx/dark-28" className="font-black underline">alinelx</Link>.</div>
         </nav>
       </aside>
     </>

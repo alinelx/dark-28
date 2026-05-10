@@ -32,7 +32,7 @@ export default async function LandmarkDetailPage({
     }
 
     return (
-        <main className="min-h-screen bg-(--color-bg) gap-4 text-(--color-text)">
+        <main>
             <PageHeader backHref={backHref} />
             <LandmarkDetail landmark={landmark}/>
             <NextStop landmark={landmark} category={category} />

@@ -14,6 +14,5 @@ export default function CategoryBadge({
       <Pills href={href} label={label} style="category"/>
     );
   }
-
   return <Pills label={label} style="category" />;
 }

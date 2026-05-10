@@ -25,7 +25,7 @@ export default function LandmarkDetail({ landmark }: LandmarkDetailProps) {
     const planned = isPlanned(landmark.id);
     return (
         <PageContainer>
-        <SectionCard className={visited ? 'bg-(--color-gold)' : planned ? 'bg-(--color-surface) border-2 border-(--color-burgundy)' : 'bg-(--color-bg)'}>
+        <SectionCard className={visited ? 'bg-(--color-gold)' : planned ? 'bg-(--color-surface) ring-3 ring-(--color-burgundy)' : 'bg-(--color-bg)'}>
             <div className="flex flex-row items-center m-auto w-fit">
             <Pill style="round" label={`${landmark.id}`} /> <h1 className="text-4xl font-black text-center m-4" style={{ fontFamily: "var(--font-headline)" }}>
             {landmark.title}
@@ -44,7 +44,7 @@ export default function LandmarkDetail({ landmark }: LandmarkDetailProps) {
             );
             })}
             </div>
-            <div className="flex flex-col m-auto w-full items-center justify-center">
+            <div className="flex flex-col w-full p-4 items-center justify-center">
             {landmark.imageUrl && (
             <figure className="w-full flex flex-col items-center">
                 <SectionCard>
@@ -64,7 +64,7 @@ export default function LandmarkDetail({ landmark }: LandmarkDetailProps) {
                 </SectionCard>
             </figure>
             )}
-            <section className="flex w-full flex-wrap justify-center gap-2 m-4">
+            <section className="flex w-full flex-wrap justify-center gap-2">
                 <Pill style="info" label={`${landmark.locationName}`} />
                 <Pill style="info" label={`${landmark.type}`} />
                 <Pill style="info" label={`${landmark.price}`} />
@@ -75,10 +75,12 @@ export default function LandmarkDetail({ landmark }: LandmarkDetailProps) {
             <div className="flex flex-col justify-center items-center gap-3 p-2">
             <p className="font-semibold text-md">{landmark.summary}</p>
             <DirectionButton/>
-            {direction === "co-to-mm"
-            ? `${landmark.routeStopMM} - ${getRouteMMInfo(landmark.routeStopMM)?.stopDetails.stop_name}`
-            : `${landmark.routeStopCO} - ${getRouteCOInfo(landmark.routeStopCO)?.stopDetails.stop_name}`}
-            <div className="flex flex-row w-full gap-7">
+            { landmark.routeStopMM && landmark.routeStopCO ?
+                direction === 'co-to-mm' ?
+                `${landmark.routeStopMM} - ${getRouteMMInfo(landmark.routeStopMM)?.stopDetails.stop_name}` :
+                `${landmark.routeStopCO} - ${getRouteCOInfo(landmark.routeStopCO)?.stopDetails.stop_name}`
+                : null };
+            <div className="flex flex-row w-full items-center justify-between">
                 <PlanButton landmarkId={landmark.id} />
                 <VisitedButton landmarkId={landmark.id} />
             </div>

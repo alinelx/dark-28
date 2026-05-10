@@ -5,7 +5,6 @@ import type { Landmark } from "@/types/landmark";
 import { usePlan } from "@/hooks/usePlan";
 import DirectionButton from "./DirectionButton";
 import PageContainer from "./PageContainer";
-import Button from "./Buttons";
 import Pill from "./Pills";
 
 type NextStopProps = {
@@ -25,19 +24,17 @@ export default function NextStop({ landmark, category }: NextStopProps) {
     ? `/route/${adjacentLandmark.slug}?category=${category}`
     : `/route/${adjacentLandmark.slug}`;
   return (
-    <footer className="border p-4 shadow-sm/20 flex flex-col ring-1 shadow-text">
-      <PageContainer>
+    <footer className="border w-full m-auto p-3 items-center shadow-sm flex flex-col bg-(--color-yellow) text-(--color-black) shadow-text">
         <h2
-          className="flex justify-center pb-4 text-3xl font-black"
+          className="flex justify-center text-2xl p-3 font-black"
           style={{ fontFamily: "var(--font-accent)" }}
         >
-        
           {direction === "co-to-mm" ? "Next Stop" : "Previous Stop"}
         </h2>
         <DirectionButton />
-        <div className="flex flex-row pt-7 justify-between items-center w-full">
+        <div className="flex flex-row pt-7 justify-evenly items-center w-full">
           <div>
-            <p className="text-sm text-(--color-text)/60">
+            <p className="text-sm text-(--color-black)/60">
               {direction === "co-to-mm" ? "Up next" : "Just before this"}
             </p>
             <p
@@ -48,12 +45,9 @@ export default function NextStop({ landmark, category }: NextStopProps) {
             </p>
           </div>
           <div>
-            <Button style="pill"> 
-              <Pill href={href} label="View" style="default" />
-            </Button>
+            <Pill href={href} label="View" style="default" />
           </div>
         </div>
-      </PageContainer>
     </footer>
   );
 }

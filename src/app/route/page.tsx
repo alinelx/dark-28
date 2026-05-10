@@ -38,22 +38,22 @@ export default function RoutePage() {
   return (
     <main className="min-h-screen bg-(--color-bg) text-(--color-text)">
       <PageHeader backHref="/" />
-      <PageContainer>
+      <PageContainer className="p-4">
 
         <h1
-          className="text-4xl font-black mb-6 text-center md:text-5xl"
+          className="text-4xl font-black text-center md:text-5xl"
           style={{ fontFamily: "var(--font-headline)" }}
         >
           Explore the Route
         </h1>
 
         <h2
-          className="mb-8 text-2xl text-center font-bold text-(--color-gold)"
+          className="text-2xl text-center font-bold text-(--color-gold)"
           style={{ fontFamily: "var(--font-accent)" }}
         >
           Discover the overlooked histories hidden across Lisbon.
         </h2>
-        <div className="flex flex-col border border-(--color-text)/10 p-4 m-4 gap-2 items-center rounded-lg">
+        <div className="flex flex-col border border-(--color-text)/10 p-4 gap-2 items-center rounded-lg">
           <h2 className="text-2xl font-semibold leading-none tracking-tight md:text-3xl" style={{ fontFamily: "var(--font-headline)" }}>Browse by theme</h2>
           <p className="text-center text-sm text-(--color-text)/60">
             Showing {filteredLandmarks.length} landmark

@@ -6,5 +6,5 @@ type PageContainerProps = {
 };
 
 export default function PageContainer({ children, className }: PageContainerProps) {
-  return <div className={`flex flex-col bg-(--color-bg) max-w-3xl m-auto items-center object-center align-middle text-center px-6 py-6 ${className} md:px-8`}>{children}</div>;
+  return <div className={`bg-(--color-bg) mx-auto w-full max-w-3xl p-4 object-center items-center text-center ${className}`}>{children}</div>;
 }

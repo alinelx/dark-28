@@ -8,7 +8,9 @@ export default function ThemeToggle(){
   return (
     <Button 
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-style="round">
+      style="round"
+      ariaLabel={theme === "dark" ? "dark mode"  : "light mode"}
+    >
       {theme === "dark"
           ? "👻"
           : "🧛"}

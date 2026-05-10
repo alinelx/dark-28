@@ -2,7 +2,6 @@
 
 import { usePlan } from "@/hooks/usePlan";
 import Button from "./Buttons";
-import Pill from "./Pills";
 
 type VisitedButtonProps = {
   landmarkId: number;
@@ -14,8 +13,8 @@ export default function VisitedButton({ landmarkId }: VisitedButtonProps) {
   return (
     <Button 
       onClick={() => toggleVisited(landmarkId)}
-      style="pill">
-        <Pill style="default" label={ visited ? "Visited" : "Check in"} />
+      style="default">
+        { visited ? "Visited" : "Check"}
     </Button>
   );
 }
