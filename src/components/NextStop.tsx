@@ -23,7 +23,7 @@ export default function NextStop({ landmark, category }: NextStopProps) {
     ? `/route/${adjacentLandmark.slug}?category=${category}`
     : `/route/${adjacentLandmark.slug}`;
   return (
-    <footer className="border w-full m-auto p-3 items-center shadow-sm flex flex-col bg-(--color-yellow) text-(--color-black) shadow-text">
+    <footer className="border w-full m-auto p-3 items-center shadow-sm flex flex-col bg-(--color-yellow) text-black shadow-text">
         <h2
           className="flex justify-center text-2xl p-3 font-black"
           style={{ fontFamily: "var(--font-accent)" }}
@@ -33,7 +33,7 @@ export default function NextStop({ landmark, category }: NextStopProps) {
         <DirectionButton />
         <div className="flex flex-row pt-7 justify-evenly items-center w-full">
           <div>
-            <p className="text-sm text-(--color-black)/60">
+            <p className="text-sm text-black/60">
               {direction === "co-to-mm" ? "Up next" : "Just before this"}
             </p>
             <p
