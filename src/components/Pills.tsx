@@ -24,7 +24,7 @@ function pillClasses(style: PillType["style"]) {
       return "rounded-full gap-4 px-3 py-1 h-fit uppercase font-bold shadow-text shadow-md/50 text-xs bg-(--color-burgundy) text-(--color-white) hover:bg-(--color-text) hover:text-(--color-bg) transition-all duration-200 ease-in-out hover:scale-105";
     
     case "view":
-      return "rounded-full px-2 py-1 uppercase font-bold shadow-text shadow-md/50 text-xs bg-(--color-bg) text-(--color-text) hover:bg-(--color-text) hover:text-(--color-bg) transition-all duration-200 ease-in-out hover:scale-110";
+      return "flex w-full items-center justify-center rounded-full px-2 py-1 uppercase font-bold shadow-text shadow-md/50 text-xs bg-(--color-bg) text-(--color-text) hover:bg-(--color-text) hover:text-(--color-bg) transition-all duration-200 ease-in-out hover:scale-110";
 
     default:
       return "rounded-full gap-4 px-4 py-1 uppercase font-bold shadow-text shadow-md/50 text-xs bg-(--color-bg) text-(--color-text) hover:bg-(--color-text) hover:text-(--color-bg) transition-all duration-200 ease-in-out hover:scale-110";

@@ -53,8 +53,16 @@ export default function LandmarkCard({ landmark, activeCategory }: LandmarkCardP
       ) : null}
     </div>
     <p className="flex flex-row max-w-lg text-sm font-semibold py-4 flex-wrap h-auto">{landmark.summary}</p>
-    <footer className="flex flex-row gap-2 h-auto justify-evenly items-end">
-      <Pill href={ activeCategory && activeCategory !== "all" ? `/route/${landmark.slug}?category=${activeCategory}` : `/route/${landmark.slug}`} label="View" style="view" />
+    <footer className="grid w-full grid-cols-3 gap-3 pt-3">
+      <Pill
+        href={
+          activeCategory && activeCategory !== "all"
+            ? `/route/${landmark.slug}?category=${activeCategory}`
+            : `/route/${landmark.slug}`
+        }
+        label="View"
+        style="view"
+      />
       <PlanButton landmarkId={landmark.id} />
       <VisitedButton landmarkId={landmark.id} />
     </footer>
