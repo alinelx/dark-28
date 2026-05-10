@@ -30,7 +30,7 @@ export default function NextStop({ landmark, category }: NextStopProps) {
     : `/route/${adjacentLandmark.slug}`;
 
   return (
-    <footer className="border border-black/10 bg-(--color-surface) p-6 shadow-sm">
+    <footer className="border border-(--color-text)/10 bg-(--color-surface) p-6 shadow-sm">
       <PageContainer>
         <h2
           className="mb-4 flex justify-center text-2xl font-semibold"

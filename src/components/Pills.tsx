@@ -30,7 +30,7 @@ export function HandlePillProps ({
     gap
 }: PillProps
 ) {
-    return (`rounded-full ${gap} px-${px} py-${py} uppercase  font-black shadow-text ${border} shadow-md/50 text-${size} bg-${bgColor} text-${textColor} ${border} !hover:bg-${bgColorHover} !hover:text-${textColorHover} transition-all duration-200 ease-in-out hover:scale-110`)
+    return (`rounded-full ${gap} px-${px} py-${py} uppercase  font-black shadow-text ${border} shadow-md/50 text-${size} bg-${bgColor} text-${textColor} ${border} hover:bg-${bgColorHover} hover:text-${textColorHover} transition-all duration-200 ease-in-out hover:scale-110`)
 } 
 
 function PillRender(style: string) {

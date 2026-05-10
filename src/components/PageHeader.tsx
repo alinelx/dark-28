@@ -32,7 +32,7 @@ export default function PageHeader({ backHref }: PageHeaderProps) {
   const secondaryButtonClass =
     "rounded-full bg-(--color-yellow) px-4 py-3 text-sm font-bold text-black --transform-button";
   const roundButtonClass =
-    "flex h-12 w-12 items-center justify-center rounded-full bg-black text-lg font-extrabold text-white transform-(--transform-button)";
+    "flex h-12 w-12 items-center justify-center rounded-full bg-black text-lg font-extrabold text-white";
   function openMenu() {
     setIsMenuOpen(true);
   }
