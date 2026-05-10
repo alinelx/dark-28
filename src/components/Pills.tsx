@@ -3,7 +3,7 @@ import Link from "next/link";
 type PillType = {
   label: string;
   href?: string;
-  style: "primary" | "secondary" | "round" | "category" | "info" | "default";
+  style: "primary" | "secondary" | "round" | "category" | "info" | "view" | "default";
 };
 
 function pillClasses(style: PillType["style"]) {
@@ -21,7 +21,10 @@ function pillClasses(style: PillType["style"]) {
       return "rounded-full gap-4 px-4 py-1 uppercase font-bold text-xs  bg-(--color-gold) text-(--color-black) hover:bg-(--color-text) hover:text-(--color-bg) transition-all duration-200 ease-in-out hover:scale-105";
     
     case "category":
-      return "rounded-full gap-4 px-4 py-1 uppercase font-bold shadow-text shadow-md/50 text-xs bg-(--color-burgundy) text-(--color-white) hover:bg-(--color-text) hover:text-(--color-bg) transition-all duration-200 ease-in-out hover:scale-105";
+      return "rounded-full gap-4 px-3 py-1 h-fit uppercase font-bold shadow-text shadow-md/50 text-xs bg-(--color-burgundy) text-(--color-white) hover:bg-(--color-text) hover:text-(--color-bg) transition-all duration-200 ease-in-out hover:scale-105";
+    
+    case "view":
+      return "rounded-full px-2 py-1 uppercase font-bold shadow-text shadow-md/50 text-xs bg-(--color-bg) text-(--color-text) hover:bg-(--color-text) hover:text-(--color-bg) transition-all duration-200 ease-in-out hover:scale-110";
 
     default:
       return "rounded-full gap-4 px-4 py-1 uppercase font-bold shadow-text shadow-md/50 text-xs bg-(--color-bg) text-(--color-text) hover:bg-(--color-text) hover:text-(--color-bg) transition-all duration-200 ease-in-out hover:scale-110";

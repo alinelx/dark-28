@@ -6,6 +6,8 @@ import { usePlan } from "@/hooks/usePlan";
 import PageHeader from "@/components/PageHeader";
 import SectionCard from "@/components/SectionCard";
 import PageContainer from "@/components/PageContainer";
+import Button from "@/components/Buttons";
+import LandmarkCard from "@/components/LandmarkCard";
 
 export default function ProfilePage() {
   const { plannedIds, visitedIds, clearVisited } = usePlan();
@@ -45,97 +47,55 @@ export default function ProfilePage() {
         </p>
 
         <div className="grid gap-4 md:grid-cols-2">
-          <SectionCard title="Saved Stops">
+          <SectionCard title="Saved Stops" className="w-full">
             <p className="text-3xl font-black">{totalPlanned}</p>
           </SectionCard>
 
-          <SectionCard title="Visited">
+          <SectionCard title="Visited" className="w-full">
             <p className="text-3xl font-black">{totalVisited}</p>
           </SectionCard>
 
-          <SectionCard title="Remaining">
+          <SectionCard title="Remaining" className="w-full">
             <p className="text-3xl font-black">{totalRemaining}</p>
           </SectionCard>
 
-          <SectionCard title="Progress">
+          <SectionCard title="Progress" className="w-full">
             <p className="text-3xl font-black">{progress}%</p>
           </SectionCard>
         </div>
 
         {visitedLandmarks.length > 0 && (
-          <div className="flex justify-end">
-            <button
-              type="button"
+          <Button
               onClick={clearVisited}
-              className="rounded-full bg-(--color-text) px-4 py-2 text-sm font-bold text-(--color-bg)"
+              style="secondary"
             >
               Clear visited
-            </button>
-          </div>
+            </Button>
         )}
 
-        <SectionCard title="Visited Landmarks">
+        <SectionCard title="Visited Landmarks" className="w-full">
           {visitedLandmarks.length === 0 ? (
             <p>No landmarks marked as visited yet.</p>
           ) : (
             <div className="flex flex-col gap-3">
-              {visitedLandmarks.map((landmark) => (
-                <div
-                  key={landmark.id}
-                  className="rounded-xl border border-(--color-text)/10 bg-(--color-surface) p-4"
-                >
-                  <h3
-                    className="text-xl font-black"
-                    style={{ fontFamily: "var(--font-headline)" }}
-                  >
-                    {landmark.title}
-                  </h3>
-                  <p className="text-sm font-bold text-(--color-gold)">
-                    {landmark.locationName} • {landmark.type}
-                  </p>
-                  <div className="pt-2">
-                    <Link
-                      href={`/route/${landmark.slug}`}
-                      className="rounded-full border border-(--color-yellow) bg-(--color-surface) px-4 py-2 text-sm font-bold text-(--color-text)"
-                    >
-                      View details
-                    </Link>
-                  </div>
-                </div>
-              ))}
+              {visitedLandmarks.map((landmark) => {
+                return (
+                  <LandmarkCard key={landmark.id} landmark={landmark} />
+                );
+              })}
             </div>
           )}
         </SectionCard>
-
-        <SectionCard title="Not Visited Yet">
+        <SectionCard title="Not Visited Yet" className="w-full">
           {remainingLandmarks.length === 0 ? (
             <p>You have completed all current landmarks.</p>
           ) : (
             <div className="flex flex-col gap-3">
-              {remainingLandmarks.map((landmark) => (
-                <div
-                  key={landmark.id}
-                  className="rounded-xl border border-(--color-text)/10 bg-(--color-surface) p-4"
-                >
-                  <h3
-                    className="text-xl font-black"
-                    style={{ fontFamily: "var(--font-headline)" }}
-                  >
-                    {landmark.title}
-                  </h3>
-                  <p className="text-sm font-bold text-(--color-gold)">
-                    {landmark.locationName} • {landmark.type}
-                  </p>
-                  <div className="pt-2">
-                    <Link
-                      href={`/route/${landmark.slug}`}
-                      className="rounded-full border border-(--color-yellow) bg-(--color-surface) px-4 py-2 text-sm font-bold text-(--color-text)"
-                    >
-                      View details
-                    </Link>
-                  </div>
-                </div>
-              ))}
+              {remainingLandmarks.map((landmark) => {
+                return (
+                  <LandmarkCard key={landmark.id} landmark={landmark} />
+                );
+              })}
             </div>
           )}
         </SectionCard>

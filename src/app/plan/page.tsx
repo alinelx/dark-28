@@ -11,10 +11,12 @@ import CategoryBadge from "@/components/CategoryBadge";
 import PageContainer from "@/components/PageContainer";
 import VisitedButton from "@/components/VisitedButton";
 import DirectionButton from "@/components/DirectionButton";
+import Button from "@/components/Buttons"
+import LandmarkCard from "@/components/LandmarkCard";
 
 export default function PlanPage() {
   const { plannedIds, direction, isVisited, clearPlan } = usePlan();
-
+ 
   const plannedLandmarks = landmarks
     .filter((landmark) => plannedIds.includes(landmark.id))
     .sort((a, b) => {
@@ -23,30 +25,22 @@ export default function PlanPage() {
       }
       return a.id - b.id;
     });
-
   return (
     <main className="min-h-screen bg-(--color-bg) text-(--color-text)">
       <PageHeader backHref="/" />
       <PageContainer>
-        <div className="mx-auto flex flex-col gap-6 px-6 py-10 items-center text-center">
-          <h1
-            className="text-4xl text-(--color-text) md:text-5xl"
-            style={{ fontFamily: "var(--font-headline)" }}
-          >
+        <div className="flex w-full justify-center flex-col items-center pt-6 text-center md:pt-8">
+          <h1 className="text-4xl font-bold" style={{ fontFamily: "var(--font-headline)" }}>
             My Plan
           </h1>
-
           <p
-            className="text-2xl font-bold text-(--color-gold)"
-            style={{ fontFamily: "var(--font-accent)" }}
+          className="text-2xl text-(--color-gold) py-6 md:py-8"
+          style={{ fontFamily: "var(--font-accent)" }}
           >
             Build your own Dark28 route through Lisbon.
           </p>
-
-          <div className="flex flex-col gap-3 w-full max-w-md">
-            <DirectionButton />
-          </div>
-
+          <DirectionButton />
+          <div className="mt-7 w-full flex flex-col">
           {plannedLandmarks.length === 0 ? (
             <SectionCard title="No saved landmarks yet">
               <p className="mb-4">
@@ -62,78 +56,20 @@ export default function PlanPage() {
             </SectionCard>
           ) : (
             plannedLandmarks.map((plannedLandmark) => {
-              const visited = isVisited(plannedLandmark.id);
-
               return (
-                <div
-                  key={plannedLandmark.id}
-                  className={`w-full rounded-2xl border p-5 text-sm transition ${
-                    visited
-                      ? "bg-(--color-gold) border-(--color-gold)"
-                      : "bg-(--color-surface) border-(--color-text)/10"
-                  }`}
-                >
-                  <div className="flex flex-col gap-3">
-                    <h2
-                      className="text-2xl text-(--color-text)"
-                      style={{ fontFamily: "var(--font-headline)" }}
-                    >
-                      {plannedLandmark.title}
-                    </h2>
-
-                    <div className="flex flex-wrap justify-center gap-2">
-                      {plannedLandmark.category.map((cat) => {
-                        const category = categories.find((c) => c.id === cat);
-
-                        return (
-                          <CategoryBadge
-                            key={cat}
-                            label={category?.label || cat}
-                            href={`/route?category=${cat}`}
-                          />
-                        );
-                      })}
-                    </div>
-
-                    <p className="text-sm font-bold text-(--color-text)">
-                      {plannedLandmark.locationName} • {plannedLandmark.type}
-                    </p>
-
-                    {plannedLandmark.estimatedVisitTime && (
-                      <p className="text-sm font-semibold">
-                        Estimated visit time: {plannedLandmark.estimatedVisitTime}
-                      </p>
-                    )}
-
-                    <p>{plannedLandmark.summary}</p>
-
-                    <div className="flex flex-wrap justify-center gap-3 pt-2">
-                      <Link
-                        href={`/route/${plannedLandmark.slug}`}
-                        className="rounded-full border border-(--color-yellow) bg-(--color-surface) px-4 py-2 text-sm font-bold text-(--color-text)"
-                      >
-                        View
-                      </Link>
-
-                      <PlanButton landmarkId={plannedLandmark.id} />
-                      <VisitedButton landmarkId={plannedLandmark.id} />
-                    </div>
-                  </div>
-                </div>
+                <LandmarkCard key={plannedLandmark.id} landmark={plannedLandmark} />
               );
             })
           )}
-
+          </div>
           {plannedLandmarks.length > 0 && (
-            <div className="flex justify-center pt-4">
-              <button
-                type="button"
+            <Button
                 onClick={clearPlan}
-                className="rounded-full bg-(--color-text) px-4 py-2 text-sm font-bold text-(--color-bg)"
+                style="secondary"
+                className="mt-7"
               >
                 Clear plan
-              </button>
-            </div>
+            </Button>
           )}
         </div>
       </PageContainer>

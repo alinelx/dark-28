@@ -34,7 +34,7 @@ export default async function LandmarkDetailPage({
     return (
         <main>
             <PageHeader backHref={backHref} />
-            <LandmarkDetail landmark={landmark}/>
+            <LandmarkDetail landmark={landmark} />
             <NextStop landmark={landmark} category={category} />
         </main>
     );

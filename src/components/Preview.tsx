@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Button from "./Buttons";
 
 type HistoricalContextPreviewProps = {
   text: string;
@@ -32,25 +33,23 @@ export default function HistoricalContextPreview({
 
       {!isExpanded && shouldTruncate && (
         <div className="relative flex m-3 justify-center">
-          <button
-            type="button"
+          <Button
             onClick={() => setIsExpanded(true)}
-            className="rounded-full bg-(--color-text) px-4 py-2 text-sm font-bold text-(--color-surface) shadow-md"
+            style="default"
           >
             Continue reading
-          </button>
+          </Button>
         </div>
       )}
 
       {isExpanded && shouldTruncate && (
         <div className="mt-4 flex justify-center">
-          <button
-            type="button"
+          <Button
             onClick={() => setIsExpanded(false)}
-            className="rounded-full bg-(--color-yellow) px-4 py-2 text-sm font-bold text-(--color-text) shadow-md"
+            style="default"
           >
             Show less
-          </button>
+          </Button>
         </div>
       )}
     </div>

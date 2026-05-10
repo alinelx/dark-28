@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 type ButtonProps = {
   children?: ReactNode;
   onClick?: () => void;
-  style: "primary" | "secondary" | "round" | "directions" | "pill" | "default";
+  style: "primary" | "secondary" | "round" | "directions" | "filters" | "status" | "default";
   className?: string;
   ariaLabel?: string;
   ariaControls?: string;
@@ -23,10 +23,16 @@ function buttonClasses(style: ButtonProps["style"]) {
       return "flex h-12 aspect-square items-center justify-center rounded-full bg-black text-lg font-extrabold text-white transition-all duration-100 ease-in-out hover:scale-110";
 
     case "directions":
-        return "rounded-full gap-4 py-1 px-3 w-fit justify-center uppercase font-black shadow-text shadow-md/50 text-sm bg-(--color-bg) text-(--color-text) hover:bg-(--color-text) hover:text-(--color-bg) transition-all duration-200 ease-in-out hover:scale-110";
+      return "rounded-full gap-4 py-1 px-3 w-fit justify-center uppercase font-black shadow-text shadow-md/50 text-sm bg-(--color-bg) text-(--color-text) hover:bg-(--color-text) hover:text-(--color-bg) transition-all duration-200 ease-in-out hover:scale-110";
       
+    case "filters":
+      return "rounded-full gap-4 py-1 px-3 w-fit uppercase justify-center font-black shadow-text ring-1 shadow-md/50 text-xs bg-(--color-surface) text-(--color-text) hover:bg-(--color-text) hover:text-(--color-surface) hover:scale-110 transition-all duration-200 ease-in-out"
+    
+    case "status":
+      return "rounded-full px-2 py-1 m-auto uppercase font-bold shadow-text shadow-md/50 text-xs bg-(--color-bg) text-(--color-text) hover:bg-(--color-text) hover:text-(--color-bg) transition-all duration-200 ease-in-out hover:scale-110";
+
     default:
-      return "rounded-full p-1 gap-4 py-1 px-3 uppercase justify-center font-black shadow-text shadow-md/50 text-xs bg-(--color-bg) text-(--color-text) hover:bg-(--color-text) hover:text-(--color-bg) transition-all duration-200 ease-in-out hover:scale-110";
+      return "rounded-full gap-4 py-1 px-3 uppercase justify-center font-black shadow-text shadow-md/50 text-xs bg-(--color-bg) text-(--color-text) hover:bg-(--color-text) hover:text-(--color-bg) transition-all duration-200 ease-in-out hover:scale-110";
   }
 }
 
