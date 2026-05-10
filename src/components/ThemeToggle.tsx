@@ -1,20 +1,17 @@
 "use client";
 
 import { useTheme } from "@/hooks/useTheme";
+import Button from "./Buttons";
 
 export default function ThemeToggle(){
   const { theme, setTheme } = useTheme();
-  const roundButtonClass =
-    "flex h-12 w-12 items-center justify-center rounded-full bg-(--color-text) text-lg (--transition-button)";
   return (
-    <button
-      type="button"
+    <Button 
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      className={roundButtonClass}
-    >
+style="round">
       {theme === "dark"
           ? "👻"
           : "🧛"}
-    </button>
+    </Button>
   );
 }

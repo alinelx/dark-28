@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import SectionCard from "@/components/SectionCard";
 import type { Metadata } from "next";
-import Pill, { HandlePillProps } from "@/components/Pills";
+import Pill from "@/components/Pills";
 
 export const metadata: Metadata = {
   title: "Dark28: Lisbon’s Dark Cultural Heritage Route",
@@ -37,21 +37,8 @@ export default function Home() {
           </div>
           <div className="mt-8 flex w-full flex-col items-center gap-3">
             <Pill href="/route" label="Explore Route" style="primary" />
-            <Link  href="/about">
-            <p className = {HandlePillProps({
-        size: "xs font-black",
-        bgColor: "(--color-bg)",
-        textColor: "(--color-text)",
-        bgColorHover: "(--color-text)",
-        textColorHover: "(--color-black)",
-        border: "ring-1",
-        px: 6,
-        py: 3,
-        gap: "mb-3"
-    })}>
-            See how Dark28 work
-            </p>
-            </Link>
+            <Pill href="/about" label="See how Dark28 work" style="default" />
+
           </div>
           <SectionCard title="Why it matters">
             <p>Tram 28 passes through places shaped by dictatorship, religious persecution, disaster, colonial memory, and mourning, yet most people experience the route without seeing those layers. Dark28 reframes a familiar tourist journey as an opportunity for historical reflection, cultural awareness, and ethical discovery.</p>
@@ -147,7 +134,7 @@ export default function Home() {
           <div className="mt-8 flex w-full flex-col mb-10 items-center gap-3">
             <Pill
               href="/route"
-              label="Explore the landmarks"
+              label="Explore landmarks"
               style="primary"
             />
           </div>

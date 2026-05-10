@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Pills from "./Pills";
 
 type CategoryBadgeProps = {
   label: string;
@@ -9,16 +9,11 @@ export default function CategoryBadge({
   label,
   href,
 }: CategoryBadgeProps) {
-  const className =
-    "rounded-full bg-(--color-burgundy) gap-2 px-4 py-1 text-xs shadow-text ring-2 shadow-md/70 font-semibold text-white (--transform-button)";
-
   if (href) {
     return (
-      <Link href={href} className={className}>
-        {label}
-      </Link>
+      <Pills href={href} label={label} style="category"/>
     );
   }
 
-  return <span className={className}>{label}</span>;
+  return <Pills label={label} style="category" />;
 }

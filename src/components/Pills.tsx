@@ -1,92 +1,39 @@
 import Link from "next/link";
 
-type PillProps = {
-  size: string;
-  bgColor: string;
-  bgColorHover: string;
-  textColor: string;
-  textColorHover: string;
-  border?: string;
-  px: number;
-  py: number;
-  gap?: string;
+type PillType = {
+  label: string;
+  href?: string;
+  style: "primary" | "secondary" | "round" | "category" | "info" | "default";
 };
 
-type PillType = {
-    label: string;
-    href?: string;
-    style: string;
+function pillClasses(style: PillType["style"]) {
+  switch (style) {
+    case "primary":
+      return "rounded-full mb-3 px-6 py-3 uppercase font-bold shadow-text ring-1 shadow-md/50 text-xl bg-(--color-text) text-(--color-surface) hover:bg-(--color-yellow) hover:text-(--color-black) transition-all duration-200 ease-in-out hover:scale-110";
+
+    case "secondary":
+      return "rounded-full mb-3 px-5 py-2 uppercase font-bold shadow-text ring-1 shadow-md/50 text-md bg-(--color-yellow) text-(--color-black) hover:bg-(--color-black) hover:text-(--color-white) transition-all duration-200 ease-in-out hover:scale-110";
+
+    case "round":
+      return "flex h-12 w-auto aspect-square items-center justify-center rounded-full bg-(--color-black) text-lg font-extrabold text-(--color-white) transition-all duration-100 ease-in-out hover:scale-110 hover:text-xl";
+
+    case "info":
+      return "rounded-full gap-4 px-4 py-1 uppercase font-bold text-xs  bg-(--color-gold) text-(--color-black) hover:bg-(--color-text) hover:text-(--color-bg) transition-all duration-200 ease-in-out hover:scale-105";
+    
+    case "category":
+      return "rounded-full gap-4 px-4 py-1 uppercase font-bold shadow-text shadow-md/50 text-xs bg-(--color-burgundy) text-(--color-white) hover:bg-(--color-text) hover:text-(--color-bg) transition-all duration-200 ease-in-out hover:scale-105";
+
+    default:
+      return "rounded-full gap-4 px-4 py-1 uppercase font-bold shadow-text shadow-md/50 text-xs bg-(--color-bg) text-(--color-text) hover:bg-(--color-text) hover:text-(--color-bg) transition-all duration-200 ease-in-out hover:scale-110";
+  }
 }
 
-export function HandlePillProps ({
-    size, 
-    bgColor,
-    bgColorHover,
-    textColor,
-    textColorHover,
-    border,
-    px,
-    py,
-    gap
-}: PillProps
-) {
-    return (`rounded-full ${gap} px-${px} py-${py} uppercase  font-black shadow-text ${border} shadow-md/50 text-${size} bg-${bgColor} text-${textColor} ${border} hover:bg-${bgColorHover} hover:text-${textColorHover} transition-all duration-200 ease-in-out hover:scale-110`)
-} 
+export default function Pill({ label, href, style }: PillType) {
+  const className = pillClasses(style);
 
-function PillRender(style: string) {
-    if (style === 'primary') {
-    return (HandlePillProps({
-        size: "xl",
-        bgColor: "(--color-text)",
-        textColor: "(--color-surface)",
-        bgColorHover: "(--color-yellow)",
-        textColorHover: "black",
-        border: "ring-1",
-        px: 6,
-        py: 3,
-        gap: "mb-3"
-    }))
-    }
-    if (style === 'secondary') {
-    return (HandlePillProps({
-        size: "md",
-        bgColor: "(--color-yellow)",
-        textColor: "(--color-black)",
-        bgColorHover: "(--color-black)",
-        textColorHover: "(--color-white)",
-        border: "ring-1",
-        px: 6,
-        py: 3,
-        gap: "mb-3"
-    }));
-    } else {
-    return (HandlePillProps({
-        size: "xs",
-        bgColor: "(--color-bg)",
-        textColor: "(--color-text)",
-        bgColorHover: "(--color-text)",
-        textColorHover: "(--color-bg)",
-        border: "",
-        px: 5,
-        py: 3,
-        gap: "gap-4"
-    }));
-    }
-}
+  if (href) {
+    return <Link href={href} className={className}>{label}</Link>;
+  }
 
-export default function Pill ({
-    label,
-    href,
-    style
-    }: PillType){
-    const className = PillRender(style);
-    if (href) {
-        return (
-        <Link href={href}
-        className={className}>
-            {label}
-        </Link>
-        );
-    }
-    return (<span className={className}>{label}</span>);
+  return <span className={className}>{label}</span>;
 }

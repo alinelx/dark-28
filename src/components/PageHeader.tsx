@@ -3,21 +3,22 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import ThemeToggle from "@/components/ThemeToggle";
+import ThemeToggle from "./ThemeToggle";
+import Pill from "./Pills";
+import Button from "./Buttons";
 
 type PageHeaderProps = {
   backHref?: string;
 };
 
 function Logo() {
-  const desktopLogoEffect= "transition-transform duration-200 ease-in-out hover:scale-110 hover:rotate-360"
   return (
     <Link href="/" aria-label="Go to homepage" className="block w-20">
       <Image
         src="/logo.png"
         width={160}
         height={160}
-        className={`h-auto w-full ${desktopLogoEffect}`}
+        className="h-auto w-full transition-transform duration-200 ease-in-out hover:scale-110 hover:rotate-360"
         alt="Dark28 Logo"
         priority
       />
@@ -27,12 +28,6 @@ function Logo() {
 
 export default function PageHeader({ backHref }: PageHeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const primaryButtonClass =
-    "rounded-full bg-black px-4 py-3 text-sm font-bold text-white --transform-button";
-  const secondaryButtonClass =
-    "rounded-full bg-(--color-yellow) px-4 py-3 text-sm font-bold text-black --transform-button";
-  const roundButtonClass =
-    "flex h-12 w-12 items-center justify-center rounded-full bg-black text-lg font-extrabold text-white";
   function openMenu() {
     setIsMenuOpen(true);
   }
@@ -41,97 +36,83 @@ export default function PageHeader({ backHref }: PageHeaderProps) {
   }
   useEffect(() => {
     if (!isMenuOpen) return;
+
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         closeMenu();
       }
     }
+
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isMenuOpen]);
   return (
     <>
       <header className="bg-(--color-yellow) px-6 pb-6 pt-10">
-        <div className="mx-auto flex max-w-3xl items-center justify-between">
-          {backHref ? (
-            <Link href={backHref} className={roundButtonClass} aria-label="Go back">
-              ⏴
-            </Link>
-          ) : (
-            <div aria-hidden="true" className={`${roundButtonClass} invisible`}>
-              ⏴
-            </div>
-          )}
+      <div className="mx-auto flex max-w-3xl items-center justify-between">
+        {backHref ? (
+          <Pill href={backHref} style="round" label="⏴" />
+        ) : (
+          <div className="invisible">
+            <Pill style="round" label="⏴" />
+          </div>
+        )}
 
+        {isMenuOpen ? (
+          <div className="invisible">
           <Logo />
+          </div>
+        ) : (
+          <Logo />
+        )}
 
-          <button
-            type="button"
-            aria-label="Open menu"
-            aria-controls="site-menu"
-            aria-expanded={isMenuOpen}
-            onClick={openMenu}
-            className={roundButtonClass}
-          >
-            ☰
-          </button>
-        </div>
+        <Button
+          style="round"
+          onClick={openMenu}
+          ariaLabel="Open menu"
+          ariaControls="site-menu"
+          ariaExpanded={isMenuOpen}
+        >
+          ☰
+        </Button>
+      </div>
       </header>
 
-      <button
-        type="button"
-        aria-label="Close menu overlay"
-        onClick={closeMenu}
-        className={`fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 ${
-          isMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-        }`}
-      />
+      {isMenuOpen && (
+        <button
+          type="button"
+          aria-label="Close menu overlay"
+          onClick={closeMenu}
+          className="fixed inset-0 z-40 bg-black/20"
+        />
+      )}
 
       <aside
         id="site-menu"
         aria-label="Main menu"
-        className={`fixed right-0 top-0 z-50 flex h-full w-72 flex-col gap-6 bg-(--color-surface) p-6 shadow-2xl transition-transform duration-300 ease-in-out ${
+        className={`fixed right-0 top-0 z-50 flex h-full place-content-end w-72 flex-col gap-6 bg-(--color-surface)/80 p-6 transition-transform duration-300 ease-in-out ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex flex-row items-center justify-evenly">
-          <div
-            className="text-2xl font-bold text-(--color-text)"
-            style={{ fontFamily: "var(--font-headline)" }}
-          >
-            Dark28
-          </div>
+        <div className="flex flex-row items-center gap-4 justify-evenly">
           <ThemeToggle />
-          <button
-            type="button"
-            aria-label="Close menu"
-            onClick={closeMenu}
-            className={roundButtonClass}
-          >
+
+          <Logo />
+
+          <Button style="round" onClick={closeMenu} ariaLabel="Close menu">
             ✕
-          </button>
+          </Button>
         </div>
 
         <nav className="flex flex-col gap-3">
-          <Link href="/" onClick={closeMenu} className={secondaryButtonClass}>
-            Home
-          </Link>
-
-          <Link href="/about" onClick={closeMenu} className={secondaryButtonClass}>
-            About
-          </Link>
-
-          <Link href="/plan" onClick={closeMenu} className={secondaryButtonClass}>
-            My Plan
-          </Link>
-
-          <Link href="/profile" onClick={closeMenu} className={secondaryButtonClass}>
-            My Progress
-          </Link>
-
-          <Link href="/route" onClick={closeMenu} className={primaryButtonClass}>
-            Explore Route
-          </Link>
+          <div onClick={closeMenu} className="flex flex-col w-fit gap-3 ">
+            <Pill href="/" style="secondary" label="Home" />
+            <Pill href="/about" style="secondary" label="About" />
+            <Pill href="/plan" style="secondary" label="My Plan" />
+            <Pill href="/profile" style="secondary" label="My progress" />
+            <Pill href="/route" style="primary" label="Explore route" />
+            <div className="text-xs text-center place-items-end">Dark28: Unveiling Lisbon’s hidden stories. Crafted by <Link href="https://github.com/alinelx/dark-28" className="font-black underline">alinelx</Link>.</div>
+          </div>
         </nav>
       </aside>
     </>

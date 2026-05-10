@@ -1,6 +1,8 @@
 "use client";
 
 import { usePlan } from "@/hooks/usePlan";
+import Button from "./Buttons";
+import Pill from "./Pills";
 
 type PlanButtonProps = {
   landmarkId: number;
@@ -8,20 +10,12 @@ type PlanButtonProps = {
 
 export default function PlanButton({ landmarkId }: PlanButtonProps) {
   const { togglePlan, isPlanned } = usePlan();
-
   const planned = isPlanned(landmarkId);
-
   return (
-    <button
-      type="button"
+    <Button 
       onClick={() => togglePlan(landmarkId)}
-      className={`rounded-full px-3 py-2 text-sm font-bold ${
-        planned
-          ? "bg-(--color-text) text-(--color-bg)"
-          : "bg-(--color-surface) border border-color-(--color-text) text-(--color-text)"
-      }`}
-    >
-      {planned ? "Remove" : "Add"}
-    </button>
+      style="pill">
+        <Pill style="default" label={ planned ? "Remove" : "Add"} />
+    </Button>
   );
 }
