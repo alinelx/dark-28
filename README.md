@@ -4,6 +4,8 @@
 
 ## Lisbon’s Dark Cultural Heritage Route
 
+**Live:** [dark28.pt](https://dark28.pt) · **Case study:** [bylx.dev/work/dark28](https://bylx.dev/work/dark28/)
+
 Dark28 is a front-end product concept that reimagines Lisbon’s iconic Tram 28 as a self-guided cultural route focused on dark heritage, historical memory, and ethical storytelling.
 
 Rather than highlighting only postcard landmarks, the project invites users to explore places connected to dictatorship, colonialism, religion, death, monarchy, and collective memory across Lisbon. It was rebuilt from an academic cultural tourism concept into a portfolio-ready digital product focused on UX/UI, front-end architecture, and content-driven design.
@@ -101,7 +103,7 @@ Possible next improvements:
 
 ## Author
 
-Aline Lopes Xavier
+Aline Lopes Xavier — [bylx.dev](https://bylx.dev)
 
 ## License
 
